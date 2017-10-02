@@ -9,7 +9,7 @@ const styles = {
 
 const ProfileMainQuestion = (props) => {
   return (
-    <div>
+    <div style={props.style}>
       <h3>{props.title}</h3>
       <p>{props.question}</p>
       <textarea style={styles.profileTextArea} />
