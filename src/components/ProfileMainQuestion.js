@@ -1,6 +1,10 @@
 import React from 'react'
 
 const styles = {
+  container: {
+    paddingLeft: 10,
+    paddingRight: 10
+  },
   profileTextArea: {
     width: 300,
     height: 450
@@ -9,10 +13,10 @@ const styles = {
 
 const ProfileMainQuestion = (props) => {
   return (
-    <div style={props.style}>
+    <div style={[props.style, styles.container]}>
       <h3>{props.title}</h3>
       <p>{props.question}</p>
-      <textarea style={styles.profileTextArea} />
+      {props.children}
     </div>
   )
 }
