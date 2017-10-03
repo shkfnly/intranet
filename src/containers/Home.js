@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Connect, SimpleSigner } from 'uport-connect'
+import { push } from 'react-router-redux'
+import { connect } from 'react-redux'
 import { nemoClientID, nemoPK } from '../private'
 
 const uport = new Connect('Nemo', {
@@ -15,6 +17,7 @@ class Home extends React.Component {
   }
   getUport () {
     uport.requestCredentials().then((credentials) => {
+      this.props.login()
       console.log(credentials)
     })
   }
@@ -38,5 +41,14 @@ class Home extends React.Component {
   }
 
 }
+const mapStateToProps = (state) => {
+  return {
+  }
+}
 
-export default Home
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: () => dispatch(push('/edit'))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

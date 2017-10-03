@@ -29,15 +29,15 @@ class NodeProfileForm extends Component {
         <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column', marginLeft: 30, marginRight: 30}}>
           {/* Profile Row */}
           <div style={{display: 'flex', flexDirection: 'row'}}>
-            <ProfileMainQuestion ref='story' title={'Story'} question={'Where have you been?'} />
-            <ProfileMainQuestion ref='purpose' title={'Purpose'} question={'What do you love?'} style={{marginLeft: 20}} />
-            <ProfileMainQuestion ref='skills' title={'Skills'} question={'What gifts do you bring?'} style={{marginLeft: 20}} />
+            <ProfileMainQuestion title={'Story'} question={'Where have you been?'} />
+            <ProfileMainQuestion title={'Purpose'} question={'What do you love?'} style={{marginLeft: 20}} />
+            <ProfileMainQuestion title={'Skills'} question={'What gifts do you bring?'} style={{marginLeft: 20}} />
           </div>
           {/* Profile Row */}
           <div style={{display: 'flex', flexDirection: 'row'}}>
-            <ProfileMainQuestion ref='accountability' title={'Accountability'} question={'Expectations'} />
-            <ProfileMainQuestion ref='needs' title={'Needs'} question={'To meet expectations'} style={{marginLeft: 20}} />
-            <ProfileMainQuestion ref='goals' title={'Growth Goals'} question={'Hopes for the future'} style={{marginLeft: 20}} />
+            <ProfileMainQuestion title={'Accountability'} question={'Expectations'} />
+            <ProfileMainQuestion title={'Needs'} question={'To meet expectations'} style={{marginLeft: 20}} />
+            <ProfileMainQuestion title={'Growth Goals'} question={'Hopes for the future'} style={{marginLeft: 20}} />
           </div>
         </div>
       </div>

@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
-import { BrowserRouter } from 'react-router-dom'
+// import { BrowserRouter } from 'react-router-dom'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
 
 import reducers from './reducers'
 
@@ -36,9 +36,6 @@ ReactDOM.render(
   </Provider>),
   document.getElementById('root')
 )
-// ReactDOM.render((
-//   <BrowserRouter>
-//     <App />
-//   </BrowserRouter>
-// ), document.getElementById('root'))
 registerServiceWorker()
+// Now you can dispatch navigation actions from anywhere!
+// store.dispatch(push('/foo'))
