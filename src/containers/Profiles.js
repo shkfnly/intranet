@@ -5,8 +5,8 @@ import NodeProfile from './NodeProfile'
 
 const Profiles = () =>
   <Switch>
-    <Route exact route={'/profiles'} component={AllProfiles} />
-    <Route route={'/profiles/:profileId'} component={NodeProfile} />
+    <Route exact path={'/profiles'} component={AllProfiles} />
+    <Route path={'/profiles/:profileID'} component={NodeProfile} />
   </Switch>
 
 export default Profiles
