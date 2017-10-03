@@ -7,10 +7,9 @@ class App extends Component {
   render () {
     return (
       <div style={{backgroundColor: '#FCFCFC'}}>
-        <header style={{height: 60, alignItems: 'center', display: 'flex'}}>
-          <h2 style={{marginLeft: 15}}>
-            Node Profiles
-          </h2>
+        <header style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'horizontal', height: 60, backgroundColor: '#667780', alignItems: 'center'}}>
+          <h1 style={{marginLeft: 30}}>NEMO</h1>
+          {/* <h3 style={{marginRight: 30}}>Login</h3> */}
         </header>
         <Main />
       </div>
