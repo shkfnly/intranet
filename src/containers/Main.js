@@ -4,6 +4,7 @@ import Home from './Home'
 import Landing from './Landing'
 import NodeProfileForm from './NodeProfileForm'
 import Profiles from './Profiles'
+
 const Main = () =>
   <main>
     <Switch>

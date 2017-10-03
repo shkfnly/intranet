@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import uport from '../utilities/uport'
 
 import { Button, Jumbotron } from 'reactstrap'
+import Header from '../components/shared/Header'
 
 class Landing extends React.Component {
   constructor () {
@@ -19,11 +20,8 @@ class Landing extends React.Component {
   }
   render () {
     return (
-      <div className='container-fluid'>
-        <header style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'horizontal', height: 60, backgroundColor: '#667780', alignItems: 'center'}}>
-          <h1 style={{marginLeft: 30}}>NEMO</h1>
-          {/* <h3 style={{marginRight: 30}}>Login</h3> */}
-        </header>
+      <div>
+        <Header />
         <Jumbotron>
           <h1 className='display-3'>Welcome to Nemo</h1>
           <p className='lead'>Your ConsenSys Concierge</p>

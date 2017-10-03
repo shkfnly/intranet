@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import ProfileMainQuestion from '../components/ProfileMainQuestion'
+import Header from '../components/shared/Header'
 
 class NodeProfileForm extends Component {
   render () {
     return (
-      <div style={{flex: 1}}>
+      <div>
+        <Header />
         <div style={{display: 'flex', marginLeft: 30}}>
           <div style={{height: 100, width: 100, backgroundColor: 'blue'}} />
           <div style={{marginLeft: 25}}>
