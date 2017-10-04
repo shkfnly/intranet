@@ -1,2 +1,3 @@
 export const REGISTER_USER = 'REGISTER_USER'
 export const LOGIN_USER = 'LOGIN_USER'
+export const LOGGED_IN_USER = 'LOGGED_IN_USER'

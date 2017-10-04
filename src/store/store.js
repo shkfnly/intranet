@@ -16,10 +16,7 @@ const routeMiddleware = routerMiddleware(history)
 function configureStore () {
   const sagaMiddleware = createSagaMiddleware()
   const store = createStore(
-    combineReducers({
-      ...reducers,
-      router: routerReducer
-    }),
+    reducers,
     applyMiddleware(routeMiddleware, sagaMiddleware)
   )
   sagaMiddleware.run(rootSaga)

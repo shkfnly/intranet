@@ -23,6 +23,9 @@ export default class Example extends React.Component {
           {/* <NavbarToggler onClick={this.toggle} /> */}
           {/* <Collapse isOpen={this.state.isOpen} navbar> */}
             <Nav className='ml-auto' navbar style={{flexDirection: 'row'}}>
+              <NavItem>
+                {this.props.name}
+              </NavItem>
               <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
                 <NavLink href='/profiles'>Profiles</NavLink>
               </NavItem>

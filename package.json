@@ -2,11 +2,14 @@
   "name": "intranet",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "bootstrap": "alpha",
     "express": "^4.16.1",
     "history": "^4.7.2",
     "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.4",
     "mongodb": "^2.2.31",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -30,6 +33,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "server": "node server.js"
-  },
-  "proxy": "http://localhost:3001/"
+  }
 }

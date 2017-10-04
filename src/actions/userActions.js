@@ -1,15 +1,22 @@
-import { LOGIN_USER, REGISTER_USER } from '../constants/UserActionTypes'
+import { LOGIN_USER, LOGGED_IN_USER, REGISTER_USER } from '../constants/UserActionTypes'
 
-export function registerUser (userObj) {
+export function registerUser (credentials) {
   return {
     type: REGISTER_USER,
-    userObj
+    credentials
   }
 }
 
-export function loginUser (userObj) {
+export function loginUser (credentials) {
   return {
     type: LOGIN_USER,
+    credentials
+  }
+}
+
+export function loggedInUser (userObj) {
+  return {
+    type: LOGGED_IN_USER,
     userObj
   }
 }

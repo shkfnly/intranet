@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Badge, Container, Row, Col, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupButton, ListGroupItem, ListGroup } from 'reactstrap'
 import ProfileMainQuestion from '../components/ProfileMainQuestion'
 import Header from '../components/shared/Header'
@@ -77,7 +78,7 @@ class NodeProfileForm extends Component {
     ))
     return (
       <div>
-        <Header />
+        <Header name={this.props.user.user.address} />
         <Container style={{marginTop: 20}}>
           <Row>
             <div style={{height: 250, width: 250, backgroundColor: 'blue'}} />
@@ -216,5 +217,9 @@ class NodeProfileForm extends Component {
     )
   }
 }
-
-export default NodeProfileForm
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+export default connect(mapStateToProps, {})(NodeProfileForm)
