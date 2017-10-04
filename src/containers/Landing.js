@@ -7,6 +7,8 @@ import uport from '../utilities/uport'
 import { Button, Jumbotron } from 'reactstrap'
 import Header from '../components/shared/Header'
 
+import { loginUser } from '../actions/userActions'
+
 class Landing extends React.Component {
   constructor () {
     super()
@@ -14,8 +16,9 @@ class Landing extends React.Component {
   }
   getUport () {
     uport.requestCredentials().then((credentials) => {
-      this.props.login()
-      console.log(credentials)
+      this.props.loginUser(credentials)
+      // this.props.login()
+      // console.log(credentials)
     })
   }
   render () {
@@ -66,7 +69,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: () => dispatch(push('/edit')),
+    loginUser: (credentials) => dispatch(loginUser(credentials)),
+    // login: () => dispatch(push('/edit')),
     profiles: () => dispatch(push('/profiles'))
   }
 }
