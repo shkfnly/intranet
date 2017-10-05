@@ -1,8 +1,9 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { compose, createStore, applyMiddleware } from 'redux'
 import createHistory from 'history/createBrowserHistory'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from '../sagas'
-import { routerReducer, routerMiddleware } from 'react-router-redux'
+import { routerMiddleware } from 'react-router-redux'
+import { autoRehydrate, persistStore } from 'redux-persist'
 
 import reducers from '../reducers'
 // Create a history of your choosing (we're using a browser history in this case)
@@ -17,12 +18,15 @@ function configureStore () {
   const sagaMiddleware = createSagaMiddleware()
   const store = createStore(
     reducers,
-    applyMiddleware(routeMiddleware, sagaMiddleware)
+    compose(
+      applyMiddleware(routeMiddleware, sagaMiddleware),
+      autoRehydrate()
+    )
   )
   sagaMiddleware.run(rootSaga)
   return store
 }
 
 const store = configureStore()
-
+persistStore(store)
 export default store

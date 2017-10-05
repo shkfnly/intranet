@@ -20,6 +20,7 @@
     "reactstrap": "^4.8.0",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
+    "redux-persist": "^4.10.1",
     "redux-saga": "^0.15.6",
     "redux-thunk": "^2.2.0",
     "uport-connect": "^0.6.4"
