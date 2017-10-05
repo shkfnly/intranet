@@ -33,14 +33,13 @@ function* registerUser (credentials) {
     },
     body: JSON.stringify(credentials)
   }
+  let registeredUser
   yield fetch('/api/register', config)
     .then((response) => response.json())
     .then((user) => {
-      console.log(user)
-      put(loggedInUser(user))
+      registeredUser = user
     })
-    // Reaches here
-  // yield console.log('these nuts')
+  yield put(loggedInUser(registeredUser))
 }
 
 function* userSaga () {

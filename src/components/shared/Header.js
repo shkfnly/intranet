@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap'
 import { loginUser, logoutUser } from '../../actions/userActions'
+import { push } from 'react-router-redux'
 import uport from '../../utilities/uport'
 import { isEmpty } from 'lodash'
 
@@ -13,12 +14,11 @@ class Header extends React.Component {
     this.state = {
       isOpen: false
     }
+    this.getUport = this.getUport.bind(this)
   }
   getUport () {
     uport.requestCredentials().then((credentials) => {
       this.props.loginUser(credentials)
-      // this.props.login()
-      // console.log(credentials)
     })
   }
   toggle () {
@@ -67,7 +67,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loginUser: (credentials) => dispatch(loginUser(credentials)),
-    logoutUser: () => dispatch(logoutUser())
+    logoutUser: () => dispatch(logoutUser()),
+    goHome: () => dispatch(push('/'))
   }
 }
 

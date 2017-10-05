@@ -109,7 +109,7 @@ class NodeProfileForm extends Component {
               <Form style={{paddingLeft: 20, paddingRight: 20}}>
                 <FormGroup row>
                   <Label for='name'>Name: </Label>
-                  <Input getRef={(input) => (this.name = input)} id='name' name='name' placeholder='Name' onChange={(e) => this.onChange('name', this.name.value)} value={this.state.name} />
+                  <Input getRef={(input) => (this.name = input)} id='name' name='name' placeholder='Name' onChange={(e) => this.onChange('name', this.name.value)} value={this.state.name || ''} />
                 </FormGroup>
                 <FormGroup row>
                   <Label for='age'>Age: </Label>
