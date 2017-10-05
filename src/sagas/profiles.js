@@ -1,8 +1,7 @@
-import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { all, put, takeEvery } from 'redux-saga/effects'
 // import { push } from 'react-router-redux'
-import { FETCH_PROFILES } from '../constants/ProfileActionTypes'
-import { storeProfiles } from '../actions/profileActions'
-import * as _ from 'lodash'
+import { FETCH_PROFILE, FETCH_PROFILES } from '../constants/ProfileActionTypes'
+import { selectProfile, storeProfiles } from '../actions/profileActions'
 
 function* fetchProfiles () {
   let config = {
@@ -18,6 +17,22 @@ function* fetchProfiles () {
       profiles = profilesArr
     })
   yield put(storeProfiles(profiles))
+}
+
+function* fetchProfile (action) {
+  let config = {
+    method: 'GET',
+    headers: new Headers(),
+    mode: 'cors',
+    cache: 'default'
+  }
+  let profile = {}
+  yield fetch(`/api/profile?address=${action.address}`, config)
+    .then((response) => response.json())
+    .then((profileResponse) => {
+      profile = profileResponse
+    })
+  yield put(selectProfile(profile))
 }
 // function* loginUser (action) {
 //   const credentials = action.credentials
@@ -61,6 +76,7 @@ function* fetchProfiles () {
 
 function* userSaga () {
   yield all([
+    takeEvery(FETCH_PROFILE, fetchProfile),
     takeEvery(FETCH_PROFILES, fetchProfiles)
     // takeEvery(REGISTER_USER, registerUser)
   ])

@@ -1,4 +1,4 @@
-import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { all, put, takeEvery } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
 import { LOGIN_USER, REGISTER_USER } from '../constants/UserActionTypes'
 import { loggedInUser } from '../actions/userActions'

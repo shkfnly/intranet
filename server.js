@@ -17,6 +17,27 @@ MongoClient.connect(url, (err, db) => {
   db.close()
 })
 
+app.get('/api/profile', (req, res) => {
+  const address = req.query.address
+  const fetchProfile = (db, callback) => {
+    db.collection('people').findOne({'address': address}, (err, doc) => {
+      assert.equal(null, err)
+      if (doc !== null) {
+        res.send(doc)
+      } else {
+        res.send({})
+        callback()
+      }
+    })
+  }
+  MongoClient.connect(url, (err, db) => {
+    assert.equal(null, err)
+    fetchProfile(db, () => {
+      db.close()
+    })
+  })
+})
+
 app.get('/api/profiles', (req, res) => {
   const fetchProfiles = (db, callback) => {
     db.collection('people').find().toArray((err, docs) => {
