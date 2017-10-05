@@ -4,10 +4,7 @@ const initialState = {
   user: {}
 }
 
-function userReducer (state, action) {
-  if (typeof state === 'undefined') {
-    return initialState
-  }
+export default function userReducer (state = initialState, action) {
   // For now, don't handle any actions
   // and just return the state given to us.
   switch (action.type) {
@@ -18,5 +15,3 @@ function userReducer (state, action) {
   }
   return state
 }
-
-export default userReducer

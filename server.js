@@ -17,15 +17,26 @@ MongoClient.connect(url, (err, db) => {
   db.close()
 })
 
-app.get('/', (req, res) => {
-  res.send('hello world')
+app.get('/api/profiles', (req, res) => {
+  const fetchProfiles = (db, callback) => {
+    db.collection('people').find().toArray((err, docs) => {
+      assert.equal(null, err)
+      res.send(docs)
+    })
+  }
+  MongoClient.connect(url, (err, db) => {
+    assert.equal(null, err)
+    fetchProfiles(db, () => {
+      db.close()
+    })
+  })
 })
 
 app.get('/api/login', (req, res) => {
   const address = req.query.address
   const pubKey = req.query.pubkey
   const fetchUser = (db, callback) => {
-    let cursor = db.collection('people').findOne({'address': address}, (err, doc) => {
+    db.collection('people').findOne({'address': address}, (err, doc) => {
       assert.equal(null, err)
       if (doc !== null) {
         res.send(doc)

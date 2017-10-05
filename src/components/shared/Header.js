@@ -22,17 +22,17 @@ export default class Example extends React.Component {
           <NavbarBrand href='/'>NEMO</NavbarBrand>
           {/* <NavbarToggler onClick={this.toggle} /> */}
           {/* <Collapse isOpen={this.state.isOpen} navbar> */}
-            <Nav className='ml-auto' navbar style={{flexDirection: 'row'}}>
-              <NavItem>
-                {this.props.name}
-              </NavItem>
-              <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-                <NavLink href='/profiles'>Profiles</NavLink>
-              </NavItem>
-              <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-                <NavLink href='/home'>Home</NavLink>
-              </NavItem>
-            </Nav>
+          <Nav className='ml-auto' navbar style={{flexDirection: 'row'}}>
+            <NavItem>
+              {this.props.name}
+            </NavItem>
+            <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+              <NavLink href='/profiles'>Profiles</NavLink>
+            </NavItem>
+            <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+              <NavLink href='/home'>Home</NavLink>
+            </NavItem>
+          </Nav>
           {/* </Collapse> */}
         </Navbar>
       </div>

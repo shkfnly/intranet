@@ -1,0 +1,2 @@
+export const FETCH_PROFILES = 'FETCH_PROFILES'
+export const STORE_PROFILES = 'STORE_PROFILES'
