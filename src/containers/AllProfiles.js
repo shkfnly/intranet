@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import Header from '../components/shared/Header'
-import { Card, CardImg, CardTitle, CardSubtitle, CardBlock } from 'reactstrap'
+import { Card, CardImg, CardText, CardTitle, CardSubtitle, CardBlock } from 'reactstrap'
 import { fetchProfiles, selectProfile } from '../actions/profileActions'
 
 class AllProfiles extends React.Component {
@@ -10,7 +10,7 @@ class AllProfiles extends React.Component {
     super()
     this.handleClick = this.handleClick.bind(this)
   }
-  componentWillMount () {
+  componentWillUpdate (np) {
     this.props.fetchProfiles()
   }
   handleClick (profile) {
@@ -24,13 +24,13 @@ class AllProfiles extends React.Component {
           <CardImg top width='100%' src='https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180' alt='Card image cap' />
           <CardBlock>
             <CardTitle>{v.name}</CardTitle>
-            <CardSubtitle>{`${v.address.slice(0, 20)}...`}</CardSubtitle>
-            {/* <CardText></CardText>
-            <Button>Button</Button> */}
+            <CardSubtitle>{v.roles}</CardSubtitle>
+            {/* <CardText>{v.name}</CardText> */}
+            {/* <Button>Button</Button> */}
           </CardBlock>
         </Card>
-      </div>
-    ))
+      </div>)
+    )
     return (
       <div>
         <Header />

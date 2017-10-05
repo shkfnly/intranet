@@ -74,7 +74,22 @@ app.get('/api/login', (req, res) => {
     })
   })
 })
-
+app.post('/api/save', (req, res) => {
+  const address = req.query.address
+  const saveProfile = (db, callback) => {
+    db.collection('people').findOneAndUpdate({'address': address}, {$set: req.body}, { returnOriginal: false }, (err, doc) => {
+      assert.equal(null, err)
+      res.send(doc.value)
+      callback()
+    })
+  }
+  MongoClient.connect(url, (err, db) => {
+    assert.equal(null, err)
+    saveProfile(db, () => {
+      db.close()
+    })
+  })
+})
 app.post('/api/register', (req, res) => {
   const registerUser = (db, callback) => {
     db.collection('people').insertOne({

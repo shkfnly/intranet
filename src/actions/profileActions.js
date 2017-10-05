@@ -1,4 +1,4 @@
-import { FETCH_PROFILE, FETCH_PROFILES, SELECT_PROFILE, STORE_PROFILES } from '../constants/ProfileActionTypes'
+import { FETCH_PROFILE, FETCH_PROFILES, SAVE_PROFILE, SELECT_PROFILE, STORE_PROFILES } from '../constants/ProfileActionTypes'
 
 export function fetchProfile (address) {
   return {
@@ -12,6 +12,13 @@ export function fetchProfiles () {
   }
 }
 
+export function saveProfile (address, profile) {
+  return {
+    type: SAVE_PROFILE,
+    address,
+    profile
+  }
+}
 export function selectProfile (profile) {
   return {
     type: SELECT_PROFILE,

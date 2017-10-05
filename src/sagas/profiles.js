@@ -1,7 +1,8 @@
 import { all, put, takeEvery } from 'redux-saga/effects'
 // import { push } from 'react-router-redux'
-import { FETCH_PROFILE, FETCH_PROFILES } from '../constants/ProfileActionTypes'
+import { FETCH_PROFILE, FETCH_PROFILES, SAVE_PROFILE } from '../constants/ProfileActionTypes'
 import { selectProfile, storeProfiles } from '../actions/profileActions'
+import { loggedInUser } from '../actions/userActions'
 
 function* fetchProfiles () {
   let config = {
@@ -33,6 +34,24 @@ function* fetchProfile (action) {
       profile = profileResponse
     })
   yield put(selectProfile(profile))
+}
+
+function* saveProfile (action) {
+  let config = {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(action.profile)
+  }
+  let returnedProfile
+  yield fetch(`/api/save?address=${action.address}`, config)
+    .then((response) => response.json())
+    .then((user) => {
+      returnedProfile = user
+    })
+  yield put(loggedInUser(returnedProfile))
 }
 // function* loginUser (action) {
 //   const credentials = action.credentials
@@ -77,7 +96,8 @@ function* fetchProfile (action) {
 function* userSaga () {
   yield all([
     takeEvery(FETCH_PROFILE, fetchProfile),
-    takeEvery(FETCH_PROFILES, fetchProfiles)
+    takeEvery(FETCH_PROFILES, fetchProfiles),
+    takeEvery(SAVE_PROFILE, saveProfile)
     // takeEvery(REGISTER_USER, registerUser)
   ])
 }

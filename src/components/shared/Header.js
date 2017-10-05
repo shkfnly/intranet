@@ -1,7 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap'
+import { loginUser, logoutUser } from '../../actions/userActions'
+import uport from '../../utilities/uport'
+import { isEmpty } from 'lodash'
 
-export default class Example extends React.Component {
+class Header extends React.Component {
   constructor (props) {
     super(props)
 
@@ -10,35 +14,64 @@ export default class Example extends React.Component {
       isOpen: false
     }
   }
+  getUport () {
+    uport.requestCredentials().then((credentials) => {
+      this.props.loginUser(credentials)
+      // this.props.login()
+      // console.log(credentials)
+    })
+  }
   toggle () {
     this.setState({
       isOpen: !this.state.isOpen
     })
   }
   render () {
+    const nav = isEmpty(this.props.user)
+      ? (<Nav className='ml-auto' navbar style={{flexDirection: 'row'}}>
+        <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+          <NavLink onClick={this.getUport}>Login</NavLink>
+        </NavItem>
+      </Nav>)
+      : (<Nav className='ml-auto' navbar style={{flexDirection: 'row'}}>
+        <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+          <NavLink href='/edit'>Edit</NavLink>
+        </NavItem>
+        <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+          <NavLink href='/profiles'>Profiles</NavLink>
+        </NavItem>
+        <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+          <NavLink onClick={this.props.logoutUser}>Logout</NavLink>
+        </NavItem>
+      </Nav>)
     return (
       <div>
         <Navbar color='faded' light toggleable>
-          <NavbarBrand href='/'>NEMO</NavbarBrand>
+          <NavbarBrand href={isEmpty(this.props.user) ? '/' : '/home'}>NEMO</NavbarBrand>
           {/* <NavbarToggler onClick={this.toggle} /> */}
           {/* <Collapse isOpen={this.state.isOpen} navbar> */}
-          <Nav className='ml-auto' navbar style={{flexDirection: 'row'}}>
-            <NavItem>
-              {this.props.name}
-            </NavItem>
-            <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-              <NavLink href='/profiles'>Profiles</NavLink>
-            </NavItem>
-            <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-              <NavLink href='/home'>Home</NavLink>
-            </NavItem>
-          </Nav>
+          {nav}
           {/* </Collapse> */}
         </Navbar>
       </div>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUser: (credentials) => dispatch(loginUser(credentials)),
+    logoutUser: () => dispatch(logoutUser())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
  // style={{marginLeft: 20}}
 
 // const Header = (props) =>
