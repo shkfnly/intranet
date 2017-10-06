@@ -23,7 +23,7 @@
     "redux-persist": "^4.10.1",
     "redux-saga": "^0.15.6",
     "redux-thunk": "^2.2.0",
-    "uport-connect": "^0.6.4"
+    "uport-connect": "^0.6.6"
   },
   "devDependencies": {
     "react-scripts": "1.0.11"

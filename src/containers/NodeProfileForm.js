@@ -99,12 +99,13 @@ class NodeProfileForm extends Component {
     const goalsList = goals ? goals.map((v, i) => (
       <ListGroupItem key={i}>{v}</ListGroupItem>
     )) : null
+    console.log(this.props.user)
     return (
       <div>
         <Header />
         <Container style={{marginTop: 20}}>
           <Row>
-            <div style={{height: 250, width: 250, backgroundColor: 'blue'}} />
+            <img src={this.props.user.avatar ? this.props.user.avatar.uri : null} style={{height: 200, width: 200, backgroundColor: 'blue'}} />
             <Col>
               <Form style={{paddingLeft: 20, paddingRight: 20}}>
                 <FormGroup row>

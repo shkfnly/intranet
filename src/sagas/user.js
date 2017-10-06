@@ -3,6 +3,7 @@ import { push } from 'react-router-redux'
 import { LOGIN_USER, REGISTER_USER } from '../constants/UserActionTypes'
 import { loggedInUser } from '../actions/userActions'
 import * as _ from 'lodash'
+
 function* loginUser (action) {
   const credentials = action.credentials
   let config = {

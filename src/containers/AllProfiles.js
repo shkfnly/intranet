@@ -4,13 +4,15 @@ import { push } from 'react-router-redux'
 import Header from '../components/shared/Header'
 import { Card, CardImg, CardText, CardTitle, CardSubtitle, CardBlock } from 'reactstrap'
 import { fetchProfiles, selectProfile } from '../actions/profileActions'
+import { throttle } from 'lodash'
 
 class AllProfiles extends React.Component {
   constructor () {
     super()
     this.handleClick = this.handleClick.bind(this)
   }
-  componentWillUpdate (np) {
+  componentWillMount (np) {
+    // throttle(this.props.fetchProfiles, 10000, {leading: true, trailing: false})
     this.props.fetchProfiles()
   }
   handleClick (profile) {
@@ -18,6 +20,7 @@ class AllProfiles extends React.Component {
     this.props.navigateToProfile(profile.address)
   }
   render () {
+    console.log(this.props.profiles)
     const profiles = this.props.profiles.map((v, i) => (
       <div key={i} onClick={() => this.handleClick(v)}>
         <Card style={{width: 200}}>

@@ -17,7 +17,10 @@ class Header extends React.Component {
     this.getUport = this.getUport.bind(this)
   }
   getUport () {
-    uport.requestCredentials().then((credentials) => {
+    uport.requestCredentials({
+      requested: ['name', 'avatar'],
+      notifications: true
+    }).then((credentials) => {
       this.props.loginUser(credentials)
     })
   }

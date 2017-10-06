@@ -11,11 +11,11 @@ const MongoClient = require('mongodb').MongoClient
 const assert = require('assert')
 
 const url = 'mongodb://localhost:27017/intranet'
-MongoClient.connect(url, (err, db) => {
-  assert.equal(null, err)
-  console.log('Connected correctly to server.')
-  db.close()
-})
+// MongoClient.connect(url, (err, db) => {
+//   assert.equal(null, err)
+//   console.log('Connected correctly to server.')
+//   db.close()
+// })
 
 app.get('/api/profile', (req, res) => {
   const address = req.query.address
@@ -43,6 +43,7 @@ app.get('/api/profiles', (req, res) => {
     db.collection('people').find().toArray((err, docs) => {
       assert.equal(null, err)
       res.send(docs)
+      callback()
     })
   }
   MongoClient.connect(url, (err, db) => {
@@ -92,10 +93,11 @@ app.post('/api/save', (req, res) => {
 })
 app.post('/api/register', (req, res) => {
   const registerUser = (db, callback) => {
-    db.collection('people').insertOne({
-      'address': req.body.address,
-      'publicKey': req.body.publicKey
-    }, (err, result) => {
+    db.collection('people').insertOne(
+      // 'address': req.body.address,
+      // 'publicKey': req.body.publicKey
+      req.body
+    , (err, result) => {
       assert.equal(err, null)
 
       const objID = new ObjectId(result.insertedId)
