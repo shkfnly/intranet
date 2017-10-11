@@ -4,62 +4,78 @@ import { saveProfile } from '../actions/profileActions'
 import { Badge, Container, Row, Col, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupButton, ListGroupItem, ListGroup } from 'reactstrap'
 import ProfileMainQuestion from '../components/ProfileMainQuestion'
 import Header from '../components/shared/Header'
+import { isEqual } from 'lodash'
+
 
 class NodeProfileForm extends Component {
   constructor (props) {
     super()
     this.state = {
-      name: props.user.name,
-      age: props.user.age,
-      location: props.user.location,
-      slack: props.user.slack,
-      roles: props.user.roles,
-      teams: props.user.teams,
-      projects: props.user.projects,
-      story: props.user.story,
-      purpose: props.user.purpose,
-      skills: props.user.skills,
-      accountability: props.user.accountability,
-      needs: props.user.needs,
-      goals: props.user.goals
+      user: {
+        name: props.user.name,
+        age: props.user.age,
+        location: props.user.location,
+        slack: props.user.slack,
+        roles: props.user.roles || [],
+        teams: props.user.teams || [],
+        projects: props.user.projects || [],
+        story: props.user.story || [],
+        purpose: props.user.purpose || [],
+        skills: props.user.skills || [],
+        accountability: props.user.accountability || [],
+        needs: props.user.needs || [],
+        goals: props.user.goals || []
+      }
     }
     this.onChange = this.onChange.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentWillReceiveProps (props) {
     this.setState({
-      name: props.user.name,
-      age: props.user.age,
-      location: props.user.location,
-      slack: props.user.slack,
-      roles: props.user.roles || [],
-      teams: props.user.teams || [],
-      projects: props.user.projects || [],
-      story: props.user.story || [],
-      purpose: props.user.purpose || [],
-      skills: props.user.skills || [],
-      accountability: props.user.accountability || [],
-      needs: props.user.needs || [],
-      goals: props.user.goals || []
+      edited: false,
+      user: {
+        name: props.user.name,
+        age: props.user.age,
+        location: props.user.location,
+        slack: props.user.slack,
+        roles: props.user.roles || [],
+        teams: props.user.teams || [],
+        projects: props.user.projects || [],
+        story: props.user.story || [],
+        purpose: props.user.purpose || [],
+        skills: props.user.skills || [],
+        accountability: props.user.accountability || [],
+        needs: props.user.needs || [],
+        goals: props.user.goals || []
+      }
     })
   }
   onChange (type, value) {
-    this.setState({[type]: value})
+    let newUserState = Object.assign({}, this.state.user, {[type]: value})
+    this.setState({user: newUserState, edited: true})
   }
   handleAdd (type, value) {
-    let temp = this.state[type]
+    let temp = this.state.user[type]
     temp.push(value)
     this[type].value = ''
-    this.setState({[type]: temp})
+    let newUserState = Object.assign({}, this.state.user, {[type]: temp})
+    this.setState({user: newUserState, edited: true})
   }
   handleDelete (type, index) {
-    let temp = this.state[type]
+    let temp = this.state.user[type]
     temp.splice(index, 1)
-    this.setState({[type]: temp})
+    let newUserState = Object.assign({}, this.state.user, {[type]: temp})
+    this.setState({user: newUserState, edited: true})
+  }
+  handleSubmit () {
+    console.log(this.props.user.address, this.state.user)
+    this.props.saveProfile(this.props.user.address, this.state.user)
+    this.setState({edited: false})
   }
   render () {
-    const {roles, teams, projects, story, purpose, skills, accountability, needs, goals} = this.state
+    const {roles, teams, projects, story, purpose, skills, accountability, needs, goals} = this.state.user
     const rolesList = roles ? roles.map((v, i) => (
       <h5 style={{paddingLeft: 3, paddingRight: 3}} key={i}>
         <Badge color='primary' onClick={(i) => this.handleDelete('roles', i)}>
@@ -99,13 +115,13 @@ class NodeProfileForm extends Component {
     const goalsList = goals ? goals.map((v, i) => (
       <ListGroupItem key={i}>{v}</ListGroupItem>
     )) : null
-    console.log(this.props.user)
+    // console.log(this.props.user, this.state.user)
     return (
       <div>
         <Header />
         <Container style={{marginTop: 20}}>
           <Row>
-            <img src={this.props.user.avatar ? this.props.user.avatar.uri : null} style={{height: 200, width: 200, backgroundColor: 'blue'}} />
+            <img src={this.props.user.avatar ? this.props.user.avatar.uri : null} style={{minHeight: 200, minWidth: 200, backgroundColor: 'blue'}} />
             <Col>
               <Form style={{paddingLeft: 20, paddingRight: 20}}>
                 <FormGroup row>
@@ -236,7 +252,7 @@ class NodeProfileForm extends Component {
               </ProfileMainQuestion>
             </Col>
           </Row>
-          <Button style={{marginBottom: 100, marginTop: 20}} color='primary' onClick={() => this.props.saveProfile(this.props.user.address, this.state)}>Save Profile</Button>
+          <Button disabled={isEqual(this.state, this.props.user)} style={{marginBottom: 100, marginTop: 20}} color='primary' onClick={this.handleSubmit}>Save Profile</Button>
         </Container>
       </div>
     )

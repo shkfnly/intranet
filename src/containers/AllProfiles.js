@@ -20,11 +20,10 @@ class AllProfiles extends React.Component {
     this.props.navigateToProfile(profile.address)
   }
   render () {
-    console.log(this.props.profiles)
     const profiles = this.props.profiles.map((v, i) => (
       <div key={i} onClick={() => this.handleClick(v)}>
         <Card style={{width: 200}}>
-          <CardImg top width='100%' src='https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180' alt='Card image cap' />
+          <CardImg top width='100%' src={v.avatar ? v.avatar.uri : 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180'} alt='Card image cap' />
           <CardBlock>
             <CardTitle>{v.name}</CardTitle>
             <CardSubtitle>{v.roles}</CardSubtitle>

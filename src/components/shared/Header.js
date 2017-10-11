@@ -11,10 +11,12 @@ class Header extends React.Component {
     super(props)
 
     this.toggle = this.toggle.bind(this)
+    this.getUport = this.getUport.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
+
     this.state = {
       isOpen: false
     }
-    this.getUport = this.getUport.bind(this)
   }
   getUport () {
     uport.requestCredentials({
@@ -28,6 +30,10 @@ class Header extends React.Component {
     this.setState({
       isOpen: !this.state.isOpen
     })
+  }
+  handleLogout () {
+    this.props.logoutUser()
+    this.props.goHome()
   }
   render () {
     const nav = isEmpty(this.props.user)

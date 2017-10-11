@@ -58,7 +58,7 @@ class NodeProfile extends Component {
         <Header />
         <Container style={{marginTop: 20}}>
           <Row>
-            <div style={{height: 250, width: 250, backgroundColor: 'blue'}} />
+            <img src={profile.avatar ? profile.avatar.uri : null} style={{height: 200, width: 200, backgroundColor: 'blue'}} />
             <Col>
               <div style={{paddingLeft: 20, paddingRight: 20}}>
                 <div>
