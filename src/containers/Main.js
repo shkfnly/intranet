@@ -5,6 +5,7 @@ import Landing from './Landing'
 import NodeProfileForm from './NodeProfileForm'
 import Profiles from './Profiles'
 import MapView from './MapView'
+import Circles from './Circles'
 
 const Main = () =>
   <main>
@@ -14,6 +15,7 @@ const Main = () =>
       <Route path='/profiles' component={Profiles} />
       <Route path='/edit' component={NodeProfileForm} />
       <Route path='/map' component={MapView} />
+      <Route path='/circles' component={Circles} />
     </Switch>
   </main>
 

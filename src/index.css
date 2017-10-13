@@ -42,3 +42,9 @@ main {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
 }
+
+
+text {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
