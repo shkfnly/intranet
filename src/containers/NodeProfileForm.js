@@ -11,6 +11,7 @@ class NodeProfileForm extends Component {
   constructor (props) {
     super()
     this.state = {
+      edited: false,
       user: {
         name: props.user.name,
         age: props.user.age,
@@ -34,7 +35,6 @@ class NodeProfileForm extends Component {
   }
   componentWillReceiveProps (props) {
     this.setState({
-      edited: false,
       user: {
         name: props.user.name,
         age: props.user.age,
@@ -55,6 +55,7 @@ class NodeProfileForm extends Component {
   onChange (type, value) {
     let newUserState = Object.assign({}, this.state.user, {[type]: value})
     this.setState({user: newUserState, edited: true})
+      // user[type]: newUserState, edited: true})
   }
   handleAdd (type, value) {
     let temp = this.state.user[type]
@@ -70,7 +71,7 @@ class NodeProfileForm extends Component {
     this.setState({user: newUserState, edited: true})
   }
   handleSubmit () {
-    console.log(this.props.user.address, this.state.user)
+    // console.log(this.props.user.address, this.state.user)
     this.props.saveProfile(this.props.user.address, this.state.user)
     this.setState({edited: false})
   }
@@ -115,7 +116,6 @@ class NodeProfileForm extends Component {
     const goalsList = goals ? goals.map((v, i) => (
       <ListGroupItem key={i}>{v}</ListGroupItem>
     )) : null
-    // console.log(this.props.user, this.state.user)
     return (
       <div>
         <Header />
@@ -126,25 +126,25 @@ class NodeProfileForm extends Component {
               <Form style={{paddingLeft: 20, paddingRight: 20}}>
                 <FormGroup row>
                   <Label for='name'>Name: </Label>
-                  <Input getRef={(input) => (this.name = input)} id='name' name='name' placeholder='Name' onChange={(e) => this.onChange('name', this.name.value)} value={this.state.name || ''} />
+                  <Input getRef={(input) => (this.name = input)} id='name' name='name' placeholder='Name' onChange={(e) => this.onChange('name', this.name.value)} value={this.state.user.name || ''} />
                 </FormGroup>
                 <FormGroup row>
                   <Label for='age'>Age: </Label>
-                  <Input getRef={(input) => (this.age = input)} type='number' id='age' name='age' placeholder='100' onChange={(e) => this.onChange('age', parseInt(this.age.value, 10))} value={this.state.age || ''} />
+                  <Input getRef={(input) => (this.age = input)} type='number' id='age' name='age' placeholder='100' onChange={(e) => this.onChange('age', parseInt(this.age.value, 10))} value={this.state.user.age || ''} />
                 </FormGroup>
                 <FormGroup row>
                   <Label for='location'>Location: </Label>
-                  <Input getRef={(input) => (this.location = input)} id='location' name='location' placeholder='Location' onChange={(e) => this.onChange('location', this.location.value)} value={this.state.location || ''} />
+                  <Input getRef={(input) => (this.location = input)} id='location' name='location' placeholder='Location' onChange={(e) => this.onChange('location', this.location.value)} value={this.state.user.location || ''} />
                 </FormGroup>
                 <FormGroup row>
                   <Label for='slack'>Slack: </Label>
-                  <Input getRef={(input) => (this.slack = input)} id='slack' name='slack' placeholder='@slackhandle' onChange={(e) => this.onChange('slack', this.slack.value)} value={this.state.slack || ''} />
+                  <Input getRef={(input) => (this.slack = input)} id='slack' name='slack' placeholder='@slackhandle' onChange={(e) => this.onChange('slack', this.slack.value)} value={this.state.user.slack || ''} />
                 </FormGroup>
               </Form>
               {/* < */}
             </Col>
           </Row>
-          <Row>
+          <Row style={{marginTop: 30}}>
             <Col>
               <FormGroup>
                 <h4>Roles:</h4>
@@ -252,7 +252,7 @@ class NodeProfileForm extends Component {
               </ProfileMainQuestion>
             </Col>
           </Row>
-          <Button disabled={isEqual(this.state, this.props.user)} style={{marginBottom: 100, marginTop: 20}} color='primary' onClick={this.handleSubmit}>Save Profile</Button>
+          <Button disabled={this.state.edited === false} style={{marginBottom: 100, marginTop: 20}} color='primary' onClick={this.handleSubmit}>Save Profile</Button>
         </Container>
       </div>
     )
