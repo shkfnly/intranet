@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import mapboxgl from 'mapbox-gl'
-import { Container, Col, Row } from 'reactstrap'
 import Header from '../components/shared/Header'
 import { fetchProfiles, selectProfile } from '../actions/profileActions'
 import MapboxClient from 'mapbox/lib/services/geocoding'
@@ -11,7 +10,8 @@ class MapView extends React.Component {
   constructor () {
     super()
     this.state = {
-      map: null
+      map: null,
+      offices: ['49 Bogart St, Brooklyn, NY', 'San Francisco, CA', 'Toronto, ON', 'London, UK', 'Dubai, UAE']
     }
   }
   componentWillMount (np) {
@@ -22,9 +22,25 @@ class MapView extends React.Component {
     mapboxgl.accessToken = 'pk.eyJ1IjoiY29uc2Vuc3lzIiwiYSI6ImNqOHBmY2w0NjBmcmYyd3F1NHNmOXJwMWgifQ.8-GlTlTTUHLL8bJSnK2xIA'
     const map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v9'
+      // style: 'mapbox://styles/mapbox/streets-v10'
+      style: 'mapbox://styles/consensys/cj8ppygty9tga2smvqxtu8vqw'
     })
+    map.setCenter([0, 0])
+    map.setZoom(1)
+
     map.addControl(new mapboxgl.NavigationControl())
+    this.state.offices.map((location) => {
+      client.geocodeForward(location, (err, data, res) => {
+        if (err) { console.error(err) }
+        let el = document.createElement('div')
+        el.className = 'mapboxgl-marker-office'
+        new mapboxgl.Marker(el)
+        .setLngLat(data.features[0].geometry.coordinates)
+        .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
+        .setHTML('<h3>Office</h3><p>' + location + '</p>'))
+        .addTo(this.state.map)
+      })
+    })
     this.setState({map: map})
   }
   componentWillReceiveProps (props) {
@@ -36,6 +52,8 @@ class MapView extends React.Component {
         // console.log(data.features[0].geometry.coordinates)
         new mapboxgl.Marker()
         .setLngLat(data.features[0].geometry.coordinates)
+        .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
+        .setHTML('<h3>' + v.name + '</h3><p>' + v.roles[0] + '</p>'))
         .addTo(this.state.map)
       })
     ))
