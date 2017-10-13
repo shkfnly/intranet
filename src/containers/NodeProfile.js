@@ -58,29 +58,27 @@ class NodeProfile extends Component {
         <Header />
         <Container style={{marginTop: 20}}>
           <Row>
-            <img src={profile.avatar ? profile.avatar.uri : null} style={{height: 200, width: 200, backgroundColor: 'blue'}} />
-            <Col>
-              <div style={{paddingLeft: 20, paddingRight: 20}}>
-                <div>
-                  <h3>Name: </h3>
-                  <text>{profile.name}</text>
-                </div>
-                <div>
-                  <h3>Age: </h3>
-                  <text>{profile.age}</text>
-                </div>
-                <div>
-                  <h3>Location: </h3>
-                  <text>{profile.location}</text>
-                </div>
-                <div>
-                  <h3>Slack Handle: </h3>
-                  <text>{profile.slackhandle}</text>
-                </div>
+            <img src={profile.avatar ? profile.avatar.uri : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'} style={{maxHeight: 500, maxWidth: 400}} />
+            <Col style={{paddingLeft: 20, paddingRight: 20}}>
+              <div>
+                <h3>Name: </h3>
+                <text>{profile.name}</text>
+              </div>
+              <div style={{marginTop: 20}}>
+                <h3>Age: </h3>
+                <text>{profile.age}</text>
+              </div>
+              <div style={{marginTop: 20}}>
+                <h3>Location: </h3>
+                <text>{profile.location}</text>
+              </div>
+              <div style={{marginTop: 20}}>
+                <h3>Slack Handle: </h3>
+                <text>{profile.slackhandle}</text>
               </div>
             </Col>
           </Row>
-          <Row>
+          <Row style={{marginTop: 20}}>
             <Col>
               <div>
                 <h4>Roles:</h4>
@@ -88,7 +86,7 @@ class NodeProfile extends Component {
               </div>
             </Col>
           </Row>
-          <Row>
+          <Row style={{marginTop: 20}}>
             <Col>
               <div>
                 <h4>Teams:</h4>
@@ -96,7 +94,7 @@ class NodeProfile extends Component {
               </div>
             </Col>
           </Row>
-          <Row>
+          <Row style={{marginTop: 20}}>
             <Col>
               <div>
                 <h4>Projects:</h4>
@@ -105,7 +103,7 @@ class NodeProfile extends Component {
             </Col>
           </Row>
           {/* Profile Row */}
-          <Row>
+          <Row style={{marginTop: 20}}>
             <Col>
               <ProfileMainQuestion title={'Story'} question={'Where have you been?'}>
                 <ListGroup>

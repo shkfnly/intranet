@@ -21,9 +21,9 @@ class AllProfiles extends React.Component {
   }
   render () {
     const profiles = this.props.profiles.map((v, i) => (
-      <div key={i} onClick={() => this.handleClick(v)}>
-        <Card style={{width: 200}}>
-          <CardImg top width='100%' src={v.avatar ? v.avatar.uri : 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180'} alt='Card image cap' />
+      <div key={i} onClick={() => this.handleClick(v)} style={{width: 200, paddingLeft: 15, paddingRight: 15}}>
+        <Card>
+          <CardImg top width='100%' src={v.avatar ? v.avatar.uri : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'} alt='Card image cap' />
           <CardBlock>
             <CardTitle>{v.name}</CardTitle>
             <CardSubtitle>{v.roles}</CardSubtitle>
@@ -36,7 +36,7 @@ class AllProfiles extends React.Component {
     return (
       <div>
         <Header />
-        <div style={{marginTop: 20, marginLeft: 20, marginRight: 20}}>
+        <div style={{marginTop: 20, marginLeft: 20, marginRight: 20, display: 'flex'}}>
           {profiles}
         </div>
       </div>
