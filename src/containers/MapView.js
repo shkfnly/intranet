@@ -43,6 +43,9 @@ class MapView extends React.Component {
     })
     this.setState({map: map})
   }
+  componentWillUnmount () {
+    this.state.map.remove()
+  }
   componentWillReceiveProps (props) {
     this.props.profiles.map((v, i) => (
       client.geocodeForward(v.location, (err, data, res) => {
