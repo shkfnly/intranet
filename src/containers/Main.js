@@ -4,6 +4,7 @@ import Home from './Home'
 import Landing from './Landing'
 import NodeProfileForm from './NodeProfileForm'
 import Profiles from './Profiles'
+import MapView from './MapView'
 
 const Main = () =>
   <main>
@@ -12,6 +13,7 @@ const Main = () =>
       <Route path='/home' component={Home} />
       <Route path='/profiles' component={Profiles} />
       <Route path='/edit' component={NodeProfileForm} />
+      <Route path='/map' component={MapView} />
     </Switch>
   </main>
 
