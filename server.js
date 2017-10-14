@@ -80,6 +80,7 @@ app.post('/api/save', (req, res) => {
   const saveProfile = (db, callback) => {
     db.collection('people').findOneAndUpdate({'address': address}, {$set: req.body}, { returnOriginal: false }, (err, doc) => {
       assert.equal(null, err)
+      console.log(doc.value)
       res.send(doc.value)
       callback()
     })

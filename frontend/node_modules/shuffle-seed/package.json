@@ -1,0 +1,40 @@
+{
+  "name": "shuffle-seed",
+  "version": "1.1.6",
+  "description": "Shuffle Array based on a Seed",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "keywords": [
+    "array",
+    "seed",
+    "shuffle",
+    "shuffle",
+    "seed",
+    "random"
+  ],
+  "author": "Andre Caetano",
+  "license": "MIT",
+  "dependencies": {
+    "seedrandom": "^2.4.2"
+  },
+  "repository": {
+    "name": "shuffle-seed",
+    "url": "https://github.com/webcaetano/shuffle-seed"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "gulp": "^3.9.0",
+    "gulp-bump": "^1.0.0",
+    "gulp-git": "^1.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-tag-version": "^1.3.0",
+    "gulp-uglify": "^1.4.2",
+    "gulp-util": "^3.0.7",
+    "mocha": "^2.3.3",
+    "run-sequence": "^1.1.4",
+    "wrench": "^1.5.8",
+    "yargs": "^3.29.0"
+  }
+}
