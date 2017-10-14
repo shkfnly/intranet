@@ -1,5 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const path = require('path')
+
+app.use(express.static(path.resolve(__dirname, '../frontend/build')))
 
 const app = express()
 app.use(bodyParser.urlencoded({
