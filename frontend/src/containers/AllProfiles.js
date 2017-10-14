@@ -11,7 +11,7 @@ class AllProfiles extends React.Component {
     super()
     this.handleClick = this.handleClick.bind(this)
   }
-  componentWillMount (np) {
+  componentDidMount (np) {
     // throttle(this.props.fetchProfiles, 10000, {leading: true, trailing: false})
     this.props.fetchProfiles()
   }
