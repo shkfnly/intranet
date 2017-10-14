@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 app.use(express.static(path.resolve(__dirname, '../frontend/build')))
 
-const url = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/intranet'
+const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/intranet'
 // MongoClient.connect(url, (err, db) => {
 //   assert.equal(null, err)
 //   console.log('Connected correctly to server.')
@@ -57,7 +57,6 @@ app.get('/api/profiles', (req, res) => {
 })
 
 app.get('/api/login', (req, res) => {
-  console.log('made it')
   const address = req.query.address
   const pubKey = req.query.pubkey
   const fetchUser = (db, callback) => {
