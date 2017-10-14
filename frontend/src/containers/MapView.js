@@ -16,10 +16,10 @@ class MapView extends React.Component {
       offices: ['49 Bogart St, Brooklyn, NY', '1049 Market St, San Francisco, CA 94103', '250 University Avenue, Toronto, ON', '23 Featherstone Street, EC1Y 8SL London, UK', 'Dubai, UAE']
     }
   }
-  // componentWillMount (np) {
-  //   // throttle(this.props.fetchProfiles, 10000, {leading: true, trailing: false})
-  //   this.props.fetchProfiles()
-  // }
+  componentWillMount (np) {
+    // throttle(this.props.fetchProfiles, 10000, {leading: true, trailing: false})
+    this.props.fetchProfiles()
+  }
   componentDidMount () {
     this.props.fetchProfiles()
     mapboxgl.accessToken = 'pk.eyJ1IjoiY29uc2Vuc3lzIiwiYSI6ImNqOHBmY2w0NjBmcmYyd3F1NHNmOXJwMWgifQ.8-GlTlTTUHLL8bJSnK2xIA'
