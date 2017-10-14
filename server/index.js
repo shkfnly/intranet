@@ -124,7 +124,9 @@ app.post('/api/register', (req, res) => {
     })
   })
 })
-
+app.get('*', function (request, response) {
+  response.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'))
+})
 app.set('port', process.env.PORT || 3001)
 
 app.listen(app.get('port'), () => {
