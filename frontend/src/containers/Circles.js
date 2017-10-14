@@ -17,11 +17,11 @@ class Circles extends React.Component {
     }
   }
   // shouldComponentUpdate () { return false }
-  componentWillMount () {
+  componentDidMount () {
     this.props.fetchProfiles()
   }
   componentWillReceiveProps (props) {
-    this.props.fetchProfiles()
+    // this.props.fetchProfiles()
     if (_.isEqual(this.props.profiles.sort(), props.profiles.sort())) {
       null
     } else {

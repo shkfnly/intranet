@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import mapboxgl from 'mapbox-gl'
 import Header from '../components/shared/Header'
 import { fetchProfiles } from '../actions/profileActions'
+import * as _ from 'lodash'
 // selectProfile
 import MapboxClient from 'mapbox/lib/services/geocoding'
 const client = new MapboxClient('pk.eyJ1IjoiY29uc2Vuc3lzIiwiYSI6ImNqOHBmY2w0NjBmcmYyd3F1NHNmOXJwMWgifQ.8-GlTlTTUHLL8bJSnK2xIA')
@@ -15,11 +16,12 @@ class MapView extends React.Component {
       offices: ['49 Bogart St, Brooklyn, NY', '1049 Market St, San Francisco, CA 94103', '250 University Avenue, Toronto, ON', '23 Featherstone Street, EC1Y 8SL London, UK', 'Dubai, UAE']
     }
   }
-  componentWillMount (np) {
-    // throttle(this.props.fetchProfiles, 10000, {leading: true, trailing: false})
-    this.props.fetchProfiles()
-  }
+  // componentWillMount (np) {
+  //   // throttle(this.props.fetchProfiles, 10000, {leading: true, trailing: false})
+  //   this.props.fetchProfiles()
+  // }
   componentDidMount () {
+    this.props.fetchProfiles()
     mapboxgl.accessToken = 'pk.eyJ1IjoiY29uc2Vuc3lzIiwiYSI6ImNqOHBmY2w0NjBmcmYyd3F1NHNmOXJwMWgifQ.8-GlTlTTUHLL8bJSnK2xIA'
     const map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -48,19 +50,23 @@ class MapView extends React.Component {
     this.state.map.remove()
   }
   componentWillReceiveProps (props) {
-    this.props.profiles.map((v, i) => (
-      client.geocodeForward(v.location, (err, data, res) => {
-        if (err) {
-          console.error(err)
-        }
-        // console.log(data.features[0].geometry.coordinates)
-        new mapboxgl.Marker()
-        .setLngLat(data.features[0].geometry.coordinates)
-        .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
-        .setHTML('<h3>' + v.name + '</h3><p>' + v.roles[0] + '</p>'))
-        .addTo(this.state.map)
-      })
-    ))
+    if (_.isEqual(this.props.profiles.sort(), props.profiles.sort())) {
+      null
+    } else {
+      this.props.profiles.map((v, i) => (
+        client.geocodeForward(v.location, (err, data, res) => {
+          if (err) {
+            console.error(err)
+          }
+          // console.log(data.features[0].geometry.coordinates)
+          new mapboxgl.Marker()
+          .setLngLat(data.features[0].geometry.coordinates)
+          .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
+          .setHTML('<h3>' + v.name + '</h3><p>' + v.roles[0] + '</p>'))
+          .addTo(this.state.map)
+        })
+      ))
+    }
   }
   render () {
     return (

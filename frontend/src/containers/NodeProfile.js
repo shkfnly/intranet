@@ -7,7 +7,7 @@ import { fetchProfile } from '../actions/profileActions'
 import { isEmpty } from 'lodash'
 
 class NodeProfile extends Component {
-  componentWillMount () {
+  componentDidMount () {
     isEmpty(this.props.profile)
       ? this.props.fetchProfile(this.props.match.params.profileID)
       : null
