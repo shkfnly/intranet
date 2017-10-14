@@ -1,17 +1,16 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
-
-app.use(express.static(path.resolve(__dirname, '../frontend/build')))
+const ObjectId = require('mongodb').ObjectID
+const MongoClient = require('mongodb').MongoClient
+const assert = require('assert')
 
 const app = express()
 app.use(bodyParser.urlencoded({
   extended: true
 }))
 app.use(bodyParser.json())
-const ObjectId = require('mongodb').ObjectID
-const MongoClient = require('mongodb').MongoClient
-const assert = require('assert')
+app.use(express.static(path.resolve(__dirname, '../frontend/build')))
 
 const url = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/intranet'
 // MongoClient.connect(url, (err, db) => {
