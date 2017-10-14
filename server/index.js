@@ -57,6 +57,7 @@ app.get('/api/profiles', (req, res) => {
 })
 
 app.get('/api/login', (req, res) => {
+  console.log('made it')
   const address = req.query.address
   const pubKey = req.query.pubkey
   const fetchUser = (db, callback) => {
@@ -82,7 +83,6 @@ app.post('/api/save', (req, res) => {
   const saveProfile = (db, callback) => {
     db.collection('people').findOneAndUpdate({'address': address}, {$set: req.body}, { returnOriginal: false }, (err, doc) => {
       assert.equal(null, err)
-      console.log(doc.value)
       res.send(doc.value)
       callback()
     })

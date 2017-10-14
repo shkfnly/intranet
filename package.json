@@ -11,7 +11,7 @@
   },
   "cacheDirectories": [
     "node_modules",
-    "react-ui/node_modules"
+    "frontend/node_modules"
   ],
   "dependencies": {
     "body-parser": "^1.18.2",
