@@ -32,16 +32,16 @@ class Circles extends React.Component {
         v.roles.forEach((role) => {
           let index = _.findIndex(data.children, (v) => v.name === role)
           index > 0
-          ? data.children[index].children.push({'name': v.name.replace(/\s/g, ''), 'size': 10})
-          : data.children.push({'name': role, children: [{'name': v.name.replace(/\s/g, ''), 'size': 10}]})
+          ? data.children[index].children.push({'name': v.name, 'size': 10})
+          : data.children.push({'name': role, children: [{'name': v.name, 'size': 10}]})
           // data.push({id: `consensys.${role.replace(/\s/g, '')}`, value: 10})
           // data.push({id: `consensys.${role.replace(/\s/g, '')}.${}`, value: 10})
         })
         v.projects.forEach((proj) => {
           let index = _.findIndex(data.children, (v) => v.name === proj)
           index > 0
-          ? data.children[index].children.push({'name': v.name.replace(/\s/g, ''), 'size': 10})
-          : data.children.push({'name': proj, children: [{'name': v.name.replace(/\s/g, ''), 'size': 10}]})
+          ? data.children[index].children.push({'name': v.name, 'size': 10})
+          : data.children.push({'name': proj, children: [{'name': v.name, 'size': 10}]})
           // data.push({id: `consensys.${proj.replace(/\s/g, '')}`, value: 10})
           // data.push({id: `consensys.${proj.replace(/\s/g, '')}.${v.name.replace(/\s/g, '')}`, value: 10})
         })
@@ -49,9 +49,9 @@ class Circles extends React.Component {
           let index = _.findIndex(data.children, (v) => v.name === team)
           index > 0
           ? (
-            data.children[index].children.push({'name': v.name.replace(/\s/g, ''), 'size': 10})
+            data.children[index].children.push({'name': v.name, 'size': 10})
           )
-          : data.children.push({'name': team, children: [{'name': v.name.replace(/\s/g, ''), 'size': 10}]})
+          : data.children.push({'name': team, children: [{'name': v.name, 'size': 10}]})
         })
       })
       d3Draw(data)
