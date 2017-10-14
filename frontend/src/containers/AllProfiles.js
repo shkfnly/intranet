@@ -26,7 +26,7 @@ class AllProfiles extends React.Component {
           <CardImg top width='100%' src={v.avatar ? v.avatar.uri : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'} alt='Card image cap' />
           <CardBlock>
             <CardTitle>{v.name}</CardTitle>
-            <CardSubtitle>{v.roles}</CardSubtitle>
+            <CardSubtitle>{v.roles[0]}</CardSubtitle>
             {/* <CardText>{v.name}</CardText> */}
             {/* <Button>Button</Button> */}
           </CardBlock>

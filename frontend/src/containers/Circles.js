@@ -51,7 +51,7 @@ class Circles extends React.Component {
           ? (
             data.children[index].children.push({'name': v.name.replace(/\s/g, ''), 'size': 10})
           )
-          : data.children.push({'name': team, children: [{'name': v.name.replace(/\s/g, ''), 'size': 10}, {'name': 'Rouven Heck', 'size': 10}]})
+          : data.children.push({'name': team, children: [{'name': v.name.replace(/\s/g, ''), 'size': 10}]})
         })
       })
       d3Draw(data)
