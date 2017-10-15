@@ -15,6 +15,7 @@ function* fetchProfiles () {
   yield fetch('/api/profiles', config)
     .then((response) => response.json())
     .then((profilesArr) => {
+      // console.log(profileArr)
       profiles = profilesArr
     })
   yield put(storeProfiles(profiles))

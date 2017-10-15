@@ -1,10 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import Header from '../components/shared/Header'
-import { Card, CardImg, CardText, CardTitle, CardSubtitle, CardBlock } from 'reactstrap'
-import { fetchProfiles, selectProfile } from '../actions/profileActions'
-import { throttle } from 'lodash'
+import Header from '../../components/shared/Header'
+import { Card, CardImg, CardTitle, CardSubtitle, CardBlock } from 'reactstrap'
+import { fetchProfiles, selectProfile } from '../../actions/profileActions'
 
 class AllProfiles extends React.Component {
   constructor () {
@@ -23,7 +22,9 @@ class AllProfiles extends React.Component {
     const profiles = this.props.profiles.map((v, i) => (
       <div key={i} onClick={() => this.handleClick(v)} style={{width: 200, paddingLeft: 15, paddingRight: 15}}>
         <Card>
-          <CardImg top width='100%' src={v.avatar ? v.avatar.uri : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'} alt='Card image cap' />
+          <div style={{width: 168, height: 168, overflow: 'hidden', textAlign: 'center'}}>
+            <CardImg top width='100%' src={v.avatar ? v.avatar.uri : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'} alt='Card image cap' />
+          </div>
           <CardBlock>
             <CardTitle>{v.name}</CardTitle>
             <CardSubtitle>{v.roles ? v.roles[0] : null}</CardSubtitle>

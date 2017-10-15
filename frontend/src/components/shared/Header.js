@@ -53,10 +53,10 @@ class Header extends React.Component {
           <NavLink href='/map'>Map</NavLink>
         </NavItem>
         <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-          <NavLink href='/edit'>Profile</NavLink>
+          <NavLink href='/profiles'>Members</NavLink>
         </NavItem>
         <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-          <NavLink href='/profiles'>Members</NavLink>
+          <NavLink href={`/profiles/${this.props.user.address}`}>Profile</NavLink>
         </NavItem>
         <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
           <NavLink onClick={this.props.logoutUser}>Logout</NavLink>

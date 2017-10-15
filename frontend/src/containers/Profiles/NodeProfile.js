@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Badge, Container, Row, Col, ListGroupItem, ListGroup } from 'reactstrap'
-import ProfileMainQuestion from '../components/ProfileMainQuestion'
-import Header from '../components/shared/Header'
-import { fetchProfile } from '../actions/profileActions'
+import { Badge, Button, Container, Row, Col, ListGroupItem, ListGroup } from 'reactstrap'
+import ProfileMainQuestion from '../../components/ProfileMainQuestion'
+import { fetchProfile } from '../../actions/profileActions'
 import { isEmpty } from 'lodash'
 
 class NodeProfile extends Component {
   componentDidMount () {
     isEmpty(this.props.profile)
-      ? this.props.fetchProfile(this.props.match.params.profileID)
+      ? this.props.fetchProfile(this.props.profileID)
       : null
   }
   render () {
@@ -55,8 +54,16 @@ class NodeProfile extends Component {
     )) : null
     return (
       <div>
-        <Header />
         <Container style={{marginTop: 20}}>
+          <Row>
+            <div style={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
+
+              {this.props.profileID === this.props.user.address
+                ? <Button color='primary' onClick={() => this.props.editHandler(true)}>Edit</Button>
+                : null
+              }
+            </div>
+          </Row>
           <Row>
             <img src={profile.avatar ? profile.avatar.uri : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'} style={{maxHeight: 500, maxWidth: 400}} />
             <Col style={{paddingLeft: 20, paddingRight: 20}}>

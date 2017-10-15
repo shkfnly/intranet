@@ -21,7 +21,7 @@ function* loginUser (action) {
   yield _.isEmpty(userObj)
       ? registerUser(credentials)
       : put(loggedInUser(userObj))
-  yield put(push('/edit'))
+  yield put(push(`/profile/${credentials.address}`))
 }
 
 function* registerUser (credentials) {

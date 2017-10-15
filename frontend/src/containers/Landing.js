@@ -73,8 +73,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loginUser: (credentials) => dispatch(loginUser(credentials)),
-    // login: () => dispatch(push('/edit')),
-    profiles: () => dispatch(push('/profiles'))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Landing)
