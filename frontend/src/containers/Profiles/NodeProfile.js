@@ -7,9 +7,7 @@ import { isEmpty } from 'lodash'
 
 class NodeProfile extends Component {
   componentDidMount () {
-    isEmpty(this.props.profile)
-      ? this.props.fetchProfile(this.props.profileID)
-      : null
+    if (isEmpty(this.props.profile)) { this.props.fetchProfile(this.props.profileID) }
   }
   render () {
     const profile = this.props.profile
@@ -65,7 +63,7 @@ class NodeProfile extends Component {
             </div>
           </Row>
           <Row>
-            <img src={profile.avatar ? profile.avatar.uri : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'} style={{maxHeight: 500, maxWidth: 400}} />
+            <img src={profile.avatar ? profile.avatar.uri : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'} style={{maxHeight: 500, maxWidth: 400}} alt='Profile' />
             <Col style={{paddingLeft: 20, paddingRight: 20}}>
               <div>
                 <h3>Name: </h3>

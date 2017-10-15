@@ -1,6 +1,4 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
-import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import uport from '../utilities/uport'
 

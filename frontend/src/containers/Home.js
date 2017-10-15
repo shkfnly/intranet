@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Container } from 'reactstrap'
 import Header from '../components/shared/Header'
 
 const Home = () =>

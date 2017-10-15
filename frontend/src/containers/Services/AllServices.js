@@ -2,7 +2,6 @@ import React from 'react'
 import Header from '../../components/shared/Header'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
 const styles = {
   circle: {
@@ -37,14 +36,15 @@ class AllServices extends React.Component {
     return (
       <div>
         <Header />
+        <h3 style={{marginTop: 30, paddingLeft: 40}}>Mesh Programming Interface</h3>
         <div style={{display: 'flex', justifyContent: 'space-around', marginTop: 30}}>
-          <div style={Object.assign({}, styles.circle, {backgroundColor: 'blue'})} onClick={() => this.props.push('/mpi/orgdev')}>
+          <div style={Object.assign({}, styles.circle, {backgroundColor: '#3e739e'})} onClick={() => this.props.push('/mpi/orgdev')}>
             <p style={styles.circleText}>Org Dev</p>
           </div>
           <div style={Object.assign({}, styles.circle, {backgroundColor: 'teal'})} onClick={() => this.props.push('/mpi/tokenservices')}>
             <p style={styles.circleText}>Token Services</p>
           </div>
-          <div style={Object.assign({}, styles.circle, {backgroundColor: 'gold'})} onClick={() => this.props.push('/mpi/productdesign')}>
+          <div style={Object.assign({}, styles.circle, {backgroundColor: '#e7bc4d'})} onClick={() => this.props.push('/mpi/productdesign')}>
             <p style={styles.circleText}>Product Design</p>
           </div>
         </div>

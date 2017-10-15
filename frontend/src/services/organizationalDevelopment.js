@@ -75,35 +75,12 @@ let organizationalDevelopment = {
         links: []
       },
       {
-        name: 'Implementation of Decentralized Practices',
-        benefits: [`Scaleable business practices, increased decision-making velocity
-                  and an efficient + self-managed working environment.`],
-        outputs: ['Custom and co-created practices as developed hand-in-hand with the team'],
-        methods: ['Workshops', '1-on-1 Coaching'],
-        availability: false,
-        members: [],
-        hours: null,
-        links: []
-      },
-      {
         name: 'Feedback Training and Coaching',
         benefits: [`People need to have a sense of progress and purpose. This can be provided by
                   teaching effective, efficient and kind feedback techniques, which establishes
                   accountability and drives personal development.`],
         outputs: ['Team-specific "Feedback Guidelines", as developed with the team'],
         methods: ['Workshops', '1-on-1 Coaching'],
-        availability: false,
-        members: [],
-        hours: null,
-        links: []
-      },
-      {
-        name: 'Emotional Intelligence Training',
-        benefits: [`The more empathy and understanding we can extend to our teammates, the better
-                  our decision-making, communication efficacy and creative output. This foundation
-                  of psychological safety goes a long way in building a meaningful work environment.`],
-        outputs: [],
-        methods: ['Team Workshops', '1-on-1 Coaching'],
         availability: false,
         members: [],
         hours: null,

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { saveProfile } from '../../actions/profileActions'
 import { Badge, Container, Row, Col, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupButton, ListGroupItem, ListGroup } from 'reactstrap'
 import ProfileMainQuestion from '../../components/ProfileMainQuestion'
-import { isEqual } from 'lodash'
+// import { isEqual } from 'lodash'
 
 class NodeProfileForm extends Component {
   constructor (props) {
@@ -118,7 +118,7 @@ class NodeProfileForm extends Component {
     return (
       <Container style={{marginTop: 20}}>
         <Row>
-          <img src={this.props.user.avatar ? this.props.user.avatar.uri : null} style={{minHeight: 200, minWidth: 200, backgroundColor: 'blue'}} />
+          <img src={this.props.user.avatar ? this.props.user.avatar.uri : null} style={{minHeight: 200, minWidth: 200}} alt='avatar' />
           <Col>
             <Form style={{paddingLeft: 20, paddingRight: 20}}>
               <FormGroup row>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import mapboxgl from 'mapbox-gl'
 import Header from '../components/shared/Header'
 import { fetchProfiles } from '../actions/profileActions'
-import * as _ from 'lodash'
+// import * as _ from 'lodash'
 // selectProfile
 import MapboxClient from 'mapbox/lib/services/geocoding'
 const client = new MapboxClient('pk.eyJ1IjoiY29uc2Vuc3lzIiwiYSI6ImNqOHBmY2w0NjBmcmYyd3F1NHNmOXJwMWgifQ.8-GlTlTTUHLL8bJSnK2xIA')
