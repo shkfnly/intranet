@@ -1,9 +1,9 @@
-import organizationDevelopment from './organizationDevelopment'
+import organizationalDevelopment from './organizationalDevelopment'
 import tokenServices from './tokenServices'
 import productDesign from './productDesign'
 
 const services = {
-  ...organizationDevelopment,
+  ...organizationalDevelopment,
   ...tokenServices,
   ...productDesign
 }
