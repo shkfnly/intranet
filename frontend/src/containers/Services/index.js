@@ -5,8 +5,8 @@ import Service from './Service'
 
 const Profiles = () =>
   <Switch>
-    <Route exact path={'/api'} component={AllServices} />
-    <Route path={'/api/:circle'} component={Service} />
+    <Route exact path={'/mpi'} component={AllServices} />
+    <Route path={'/mpi/:circle'} component={Service} />
   </Switch>
 
 export default Profiles

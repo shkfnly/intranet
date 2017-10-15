@@ -15,7 +15,7 @@ const Main = () =>
       <Route path='/profiles' component={Profiles} />
       <Route path='/map' component={MapView} />
       <Route path='/circles' component={Circles} />
-      <Route path='/services' component={Services} />
+      <Route path='/mpi' component={Services} />
     </Switch>
   </main>
 
