@@ -110,7 +110,7 @@ const tokenServices = {
         members: ['Harrison Hines'],
         hours: 'Dependent on Scope',
         links: []
-      },
+      }
     ]
   }
 }

@@ -4,7 +4,8 @@ import productDesign from './productDesign'
 
 const services = {
   ...organizationDevelopment,
-  ...tokenServices
+  ...tokenServices,
+  ...productDesign
 }
 
 export default services
