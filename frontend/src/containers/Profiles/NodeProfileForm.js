@@ -138,7 +138,6 @@ class NodeProfileForm extends Component {
                 <Input getRef={(input) => (this.slack = input)} id='slack' name='slack' placeholder='@slackhandle' onChange={(e) => this.onChange('slack', this.slack.value)} value={this.state.user.slack || ''} />
               </FormGroup>
             </Form>
-            {/* < */}
           </Col>
         </Row>
         <Row style={{marginTop: 30}}>

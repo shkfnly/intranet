@@ -1,7 +1,7 @@
 import React from 'react'
 import Services from '../../services/index'
 import Header from '../../components/shared/Header'
-import { Card, CardHeader, CardTitle, CardText, Collapse } from 'reactstrap'
+import { Button, Card, CardHeader, CardTitle, CardText, Collapse } from 'reactstrap'
 
 const styles = {
   serviceHeading: {
@@ -28,18 +28,22 @@ const styles = {
   }
 }
 const mapping = {
-  orgdev: 'Organizational Development',
-  tokenservices: 'Token Services',
-  productdesign: 'Product Design'
+  orgdev: {
+    name: 'Organizational Development',
+    formlink: 'https://docs.google.com/forms/d/e/1FAIpQLSfCszTaPKzIPV8IO4tbogIF6-TUP6bE0XqRp6q7kltwW0LJig/viewform',
+    background: '#3e739e'
+  },
+  tokenservices: {
+    name: 'Token Services',
+    formlink: 'https://docs.google.com/forms/d/e/1FAIpQLScrPfL07wp9rk7bkXDZLc9A8HUCqK-0hpJpDNHZv9ewABd4iQ/viewform',
+    background: 'teal'
+  },
+  productdesign: {
+    name: 'Product Design',
+    formlink: '',
+    background: '#e7bc4d'
+  }
 }
-const background = {
-  orgdev: '#3e739e',
-  tokenservices: 'teal',
-  productdesign: '#e7bc4d'
-}
-const backgroundSelector = (key) => (
-  {backgroundColor: background[key]}
-)
 
 const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1)
@@ -67,9 +71,11 @@ class Service extends React.Component {
     this.setState({[j]: typeof this.state[j] === 'undefined' ? true : !this.state[j]})
   }
   render () {
-    const dataObj = Services[mapping[this.props.match.params.circle]]
+    const routeObj = mapping[this.props.match.params.circle]
+    const dataObj = Services[routeObj.name]
+
     const offerings = dataObj.services.map((v, i) => {
-      const backgroundColor = backgroundSelector(this.props.match.params.circle)
+      const backgroundColor = {backgroundColor: routeObj.background}
       return (
         <Card style={{marginBottom: 30, width: 300}} key={i} onClick={() => this.handleClick(i)}>
           <CardHeader tag='h4' style={{...styles.serviceHeading, ...backgroundColor}}>
@@ -129,6 +135,12 @@ class Service extends React.Component {
       <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginTop: 20}}>
         {offerings}
       </div>
+      {routeObj.formlink.length > 0
+        ? <a href={routeObj.formlink} target='_blank'>
+          <Button style={{marginLeft: 15}} color='primary'>Submit Request</Button>
+        </a>
+        : 0
+      }
     </div>)
   }
 }
