@@ -29,30 +29,30 @@ class Circles extends React.Component {
         children: []
       }
       props.profiles.map((v, i) => {
-        v.roles.forEach((role) => {
+        v.roles ? v.roles.forEach((role) => {
           let index = _.findIndex(data.children, (v) => v.name === role)
           index > 0
           ? data.children[index].children.push({'name': v.name, 'size': 10})
           : data.children.push({'name': role, children: [{'name': v.name, 'size': 10}]})
           // data.push({id: `consensys.${role.replace(/\s/g, '')}`, value: 10})
           // data.push({id: `consensys.${role.replace(/\s/g, '')}.${}`, value: 10})
-        })
-        v.projects.forEach((proj) => {
+        }) : null
+        v.projects ? v.projects.forEach((proj) => {
           let index = _.findIndex(data.children, (v) => v.name === proj)
           index > 0
           ? data.children[index].children.push({'name': v.name, 'size': 10})
           : data.children.push({'name': proj, children: [{'name': v.name, 'size': 10}]})
           // data.push({id: `consensys.${proj.replace(/\s/g, '')}`, value: 10})
           // data.push({id: `consensys.${proj.replace(/\s/g, '')}.${v.name.replace(/\s/g, '')}`, value: 10})
-        })
-        v.teams.forEach((team) => {
+        }) : null
+        v.teams ? v.teams.forEach((team) => {
           let index = _.findIndex(data.children, (v) => v.name === team)
           index > 0
           ? (
             data.children[index].children.push({'name': v.name, 'size': 10})
           )
           : data.children.push({'name': team, children: [{'name': v.name, 'size': 10}]})
-        })
+        }) : null
       })
       d3Draw(data)
       this.setState({data})

@@ -50,19 +50,21 @@ class MapView extends React.Component {
     this.state.map.remove()
   }
   componentWillReceiveProps (props) {
-    this.props.profiles.map((v, i) => (
-      client.geocodeForward(v.location, (err, data, res) => {
-        if (err) {
-          console.error(err)
-        }
-        // console.log(data.features[0].geometry.coordinates)
-        new mapboxgl.Marker()
-        .setLngLat(data.features[0].geometry.coordinates)
-        .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
-        .setHTML('<h3>' + v.name + '</h3><p>' + v.roles[0] + '</p>'))
-        .addTo(this.state.map)
-      })
-    ))
+    this.props.profiles.map((v, i) => {
+      if (v.location) {
+        client.geocodeForward(v.location, (err, data, res) => {
+          if (err) {
+            console.error(err)
+          }
+          // console.log(data.features[0].geometry.coordinates)
+          new mapboxgl.Marker()
+          .setLngLat(data.features[0].geometry.coordinates)
+          .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
+          .setHTML('<h3>' + v.name + '</h3><p>' + v.roles ? v.roles[0] : null + '</p>'))
+          .addTo(this.state.map)
+        })
+      }
+    })
   }
   render () {
     return (
