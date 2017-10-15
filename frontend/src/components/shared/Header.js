@@ -44,20 +44,24 @@ class Header extends React.Component {
       </Nav>)
       : (<Nav className='ml-auto' navbar style={{flexDirection: 'row'}}>
         <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+          <NavLink href='https://polar-forest-13728.herokuapp.com/'>Spokes</NavLink>
+        </NavItem>
+        <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
           <NavLink href='/circles'>Circles</NavLink>
         </NavItem>
         <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
           <NavLink href='/map'>Map</NavLink>
         </NavItem>
         <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-          <NavLink href='/edit'>Edit</NavLink>
+          <NavLink href='/edit'>Profile</NavLink>
         </NavItem>
         <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-          <NavLink href='/profiles'>Profiles</NavLink>
+          <NavLink href='/profiles'>Members</NavLink>
         </NavItem>
         <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
           <NavLink onClick={this.props.logoutUser}>Logout</NavLink>
         </NavItem>
+
       </Nav>)
     return (
       <div>
