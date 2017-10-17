@@ -10,7 +10,8 @@ export default function profileReducer (state = initialState, action) {
   // and just return the state given to us.
   switch (action.type) {
     case STORE_PROFILES:
-      return Object.assign({}, state, {profiles: action.profiles})
+      var profiles = Object.assign({}, state, {profiles: action.profiles})
+      return profiles
     case SELECT_PROFILE:
       var obj = Object.assign({}, state, {profile: action.profile})
       return obj

@@ -40,10 +40,11 @@ const dataParser = (profiles) => {
 
 class Circles extends React.Component {
   // shouldComponentUpdate () { return false }
-  componentWillMount () {
-    this.props.fetchProfiles()
-  }
+  // componentWillMount () {
+  //
+  // }
   componentDidMount () {
+    this.props.fetchProfiles()
     const data = dataParser(this.props.profiles)
     d3Draw(data)
   }

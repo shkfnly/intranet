@@ -70,7 +70,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginUser: (credentials) => dispatch(loginUser(credentials)),
+    loginUser: (credentials) => dispatch(loginUser(credentials))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Landing)

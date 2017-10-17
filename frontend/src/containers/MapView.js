@@ -18,7 +18,7 @@ class MapView extends React.Component {
   }
   componentWillMount (np) {
     // throttle(this.props.fetchProfiles, 10000, {leading: true, trailing: false})
-    this.props.fetchProfiles()
+    // this.props.fetchProfiles()
   }
   componentDidMount () {
     this.props.fetchProfiles()
@@ -51,7 +51,6 @@ class MapView extends React.Component {
   }
   componentWillReceiveProps (props) {
     this.props.profiles.map((v, i) => {
-      console.log(v.name)
       if (v.location) {
         client.geocodeForward(v.location, (err, data, res) => {
           if (err) {
@@ -61,7 +60,20 @@ class MapView extends React.Component {
           new mapboxgl.Marker()
           .setLngLat(data.features[0].geometry.coordinates)
           .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
-          .setHTML(`<h3>${v.name}</h3><p>${typeof v.roles !== 'undefined' ? v.roles[0] : null}</p>`))
+          .setHTML(`
+            <div style='width: 168px; height: 168px; overflow: hidden; textAlign: 'center';'>
+              <img style='width: 100%;'src=${
+                v.avatar
+                ? v.avatar.uri
+                : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'}
+              />
+            </div>
+            <h3>
+              ${v.name}
+            </h3>
+            <p>
+              ${typeof v.roles !== 'undefined' ? v.roles[0] : null}
+            </p>`))
           .addTo(this.state.map)
         })
       }
@@ -71,7 +83,7 @@ class MapView extends React.Component {
     return (
       <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
         <Header />
-        <div id='map' style={{flex: 1}} ref={el => this.mapContainer = el} />
+        <div id='map' style={{flex: 1}} ref={el => { this.mapContainer = el; return }} />
       </div>
     )
   }
