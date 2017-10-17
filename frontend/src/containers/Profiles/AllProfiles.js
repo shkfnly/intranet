@@ -10,10 +10,10 @@ class AllProfiles extends React.Component {
     super()
     this.handleClick = this.handleClick.bind(this)
   }
-  componentDidMount () {
-    // throttle(this.props.fetchProfiles, 10000, {leading: true, trailing: false})
-    this.props.fetchProfiles()
-  }
+  // componentDidMount () {
+  //   // throttle(this.props.fetchProfiles, 10000, {leading: true, trailing: false})
+  //   // this.props.fetchProfiles()
+  // }
   componentWillMount () {
     this.props.fetchProfiles()
   }
