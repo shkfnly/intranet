@@ -10,12 +10,11 @@ class AllProfiles extends React.Component {
     super()
     this.handleClick = this.handleClick.bind(this)
   }
-  componentDidMount (np) {
+  componentDidMount () {
     // throttle(this.props.fetchProfiles, 10000, {leading: true, trailing: false})
     this.props.fetchProfiles()
   }
   handleClick (profile) {
-    this.props.selectProfile(profile)
     this.props.navigateToProfile(profile.address)
   }
   render () {

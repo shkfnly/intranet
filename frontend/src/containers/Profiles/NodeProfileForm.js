@@ -11,19 +11,19 @@ class NodeProfileForm extends Component {
     this.state = {
       edited: false,
       user: {
-        name: props.user.name,
-        age: props.user.age,
-        location: props.user.location,
-        slack: props.user.slack,
-        roles: props.user.roles || [],
-        teams: props.user.teams || [],
-        projects: props.user.projects || [],
-        story: props.user.story || [],
-        purpose: props.user.purpose || [],
-        skills: props.user.skills || [],
-        accountability: props.user.accountability || [],
-        needs: props.user.needs || [],
-        goals: props.user.goals || []
+        name: props.profile.name,
+        age: props.profile.age,
+        location: props.profile.location,
+        slack: props.profile.slack,
+        roles: props.profile.roles || [],
+        teams: props.profile.teams || [],
+        projects: props.profile.projects || [],
+        story: props.profile.story || [],
+        purpose: props.profile.purpose || [],
+        skills: props.profile.skills || [],
+        accountability: props.profile.accountability || [],
+        needs: props.profile.needs || [],
+        goals: props.profile.goals || []
       }
     }
     this.onChange = this.onChange.bind(this)
@@ -31,23 +31,26 @@ class NodeProfileForm extends Component {
     this.handleDelete = this.handleDelete.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+  // componentWillUnmount () {
+  //   this.setState({user: {}})
+  // }
   componentWillReceiveProps (props) {
     this.setState({
       user: {
-        avatar: props.user.avatar,
-        name: props.user.name,
-        age: props.user.age,
-        location: props.user.location,
-        slack: props.user.slack,
-        roles: props.user.roles || [],
-        teams: props.user.teams || [],
-        projects: props.user.projects || [],
-        story: props.user.story || [],
-        purpose: props.user.purpose || [],
-        skills: props.user.skills || [],
-        accountability: props.user.accountability || [],
-        needs: props.user.needs || [],
-        goals: props.user.goals || []
+        avatar: props.profile.avatar,
+        name: props.profile.name,
+        age: props.profile.age,
+        location: props.profile.location,
+        slack: props.profile.slack,
+        roles: props.profile.roles || [],
+        teams: props.profile.teams || [],
+        projects: props.profile.projects || [],
+        story: props.profile.story || [],
+        purpose: props.profile.purpose || [],
+        skills: props.profile.skills || [],
+        accountability: props.profile.accountability || [],
+        needs: props.profile.needs || [],
+        goals: props.profile.goals || []
       }
     })
   }
@@ -70,12 +73,13 @@ class NodeProfileForm extends Component {
     this.setState({user: newUserState, edited: true})
   }
   handleSubmit () {
-    // console.log(this.props.user.address, this.state.user)
+    console.log('State User', this.state.user)
+    console.log('Props Profile', this.props.profile)
     this.props.saveProfile(this.props.user.address, this.state.user)
     this.setState({edited: false})
   }
   render () {
-    const {roles, teams, projects, story, purpose, skills, accountability, needs, goals} = this.state.user
+    const {avatar, roles, teams, projects, story, purpose, skills, accountability, needs, goals} = this.state.user
     const rolesList = roles ? roles.map((v, i) => (
       <h5 style={{paddingLeft: 3, paddingRight: 3}} key={i}>
         <Badge color='primary' onClick={(i) => this.handleDelete('roles', i)}>
@@ -118,7 +122,7 @@ class NodeProfileForm extends Component {
     return (
       <Container style={{marginTop: 20}}>
         <Row>
-          <img src={this.props.user.avatar ? this.props.user.avatar.uri : null} style={{minHeight: 200, minWidth: 200}} alt='avatar' />
+          <img src={avatar ? avatar.uri : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'} style={{minHeight: 200, minWidth: 200, maxHeight: 200, maxWidth: 200}} alt='avatar' />
           <Col>
             <Form style={{paddingLeft: 20, paddingRight: 20}}>
               <FormGroup row>

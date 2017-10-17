@@ -17,6 +17,7 @@ function* loginUser (action) {
     .then((response) => response.json())
     .then((user) => {
       userObj = user
+      console.log('userObj', userObj)
     })
   yield _.isEmpty(userObj)
       ? registerUser(credentials)
