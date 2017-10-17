@@ -32,52 +32,176 @@ class MapView extends React.Component {
     map.setZoom(1)
 
     map.addControl(new mapboxgl.NavigationControl())
-    this.state.offices.map((location) => {
-      client.geocodeForward(location, (err, data, res) => {
-        if (err) { console.error(err) }
-        let el = document.createElement('div')
-        el.className = 'mapboxgl-marker-office'
-        new mapboxgl.Marker(el)
-        .setLngLat(data.features[0].geometry.coordinates)
-        .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
-        .setHTML('<h3>Office</h3><p>' + location + '</p>'))
-        .addTo(this.state.map)
+    // let featureSet = {
+    //   'type': 'FeatureCollection',
+    //   'features': []
+    // }
+    map.on('load', () => {
+      map.addSource('people', {type: 'geojson', data: {type: 'FeatureCollection', features: []}, cluster: true})
+      map.addSource('offices', {type: 'geojson', data: {type: 'FeatureCollection', features: []}, cluster: true})
+      this.state.offices.map((location) => {
+        client.geocodeForward(location, (err, data, res) => {
+          if (err) { console.error(err) }
+          let el = document.createElement('div')
+          el.className = 'mapboxgl-marker-office'
+          new mapboxgl.Marker(el)
+          .setLngLat(data.features[0].geometry.coordinates)
+          .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
+          .setHTML('<h3>Office</h3><p>' + location + '</p>'))
+          .addTo(map)
+          // featureSet.features.push(data.features[0])
+          // map.getSource('offices').setData(featureSet)
+        })
       })
+      // map.addLayer({
+      //   id: 'clusters',
+      //   type: 'circle',
+      //   source: 'offices',
+      //   filter: ['has', 'point_count'],
+      //   paint: {
+      //     'circle-color': {
+      //       property: 'point_count',
+      //       type: 'interval',
+      //       stops: [
+      //         [0, '#51bbd6'],
+      //         [100, '#f1f075'],
+      //         [750, '#f28cb1']
+      //       ]
+      //     },
+      //     'circle-radius': {
+      //       property: 'point_count',
+      //       type: 'interval',
+      //       stops: [
+      //           [0, 20],
+      //           [100, 30],
+      //           [750, 40]
+      //       ]
+      //     }
+      //   }
+      // })
+      //
+      // map.addLayer({
+      //   id: 'cluster-count',
+      //   type: 'symbol',
+      //   source: 'offices',
+      //   filter: ['has', 'point_count'],
+      //   layout: {
+      //     'text-field': '{point_count_abbreviated}',
+      //     'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+      //     'text-size': 12
+      //   }
+      // })
+      //
+      // map.addLayer({
+      //   id: 'unclustered-point',
+      //   type: 'circle',
+      //   source: 'offices',
+      //   filter: ['!has', 'point_count'],
+      //   paint: {
+      //     'circle-color': '#11b4da',
+      //     'circle-radius': 4,
+      //     'circle-stroke-width': 1,
+      //     'circle-stroke-color': '#fff'
+      //   }
+      // })
     })
+
     this.setState({map: map})
   }
   componentWillUnmount () {
     this.state.map.remove()
   }
   componentWillReceiveProps (props) {
-    this.props.profiles.map((v, i) => {
+    let people = {
+      'type': 'FeatureCollection',
+      'features': []
+    }
+    const features = this.props.profiles.map((v, i) => {
       if (v.location) {
         client.geocodeForward(v.location, (err, data, res) => {
           if (err) {
             console.error(err)
           }
           // console.log(data.features[0].geometry.coordinates)
-          new mapboxgl.Marker()
-          .setLngLat(data.features[0].geometry.coordinates)
-          .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
-          .setHTML(`
-            <div style='width: 168px; height: 168px; overflow: hidden; textAlign: 'center';'>
-              <img style='width: 100%;'src=${
-                v.avatar
-                ? v.avatar.uri
-                : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'}
-              />
-            </div>
-            <h3>
-              ${v.name}
-            </h3>
-            <p>
-              ${typeof v.roles !== 'undefined' ? v.roles[0] : null}
-            </p>`))
-          .addTo(this.state.map)
+          people.features.push(data.features[0])
+          // new mapboxgl.Marker()
+          // .setLngLat(data.features[0].geometry.coordinates)
+          // .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
+          // .setHTML(`
+          //   <div style='width: 168px; height: 168px; overflow: hidden; textAlign: 'center';'>
+          //     <img style='width: 100%;'src=${
+          //       v.avatar
+          //       ? v.avatar.uri
+          //       : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'}
+          //     />
+          //   </div>
+          //   <h3>
+          //     ${v.name}
+          //   </h3>
+          //   <p>
+          //     ${typeof v.roles !== 'undefined' ? v.roles[0] : null}
+          //   </p>`))
+          // .addTo(this.state.map)
+          // typeof this.state.map.getSource('people') !== 'undefined' ? this.state.map.getSource('people').setData(people) : null
         })
       }
     })
+    this.state.map.on('load', () => {
+      typeof this.state.map.getSource('people') !== 'undefined' ? this.state.map.getSource('people').setData(people) : null
+      this.state.map.addLayer({
+        id: 'people-clusters',
+        type: 'circle',
+        source: 'people',
+        filter: ['has', 'point_count'],
+        paint: {
+          'circle-color': {
+            property: 'point_count',
+            type: 'interval',
+            stops: [
+                [0, '#51bbd6'],
+                [100, '#f1f075'],
+                [750, '#f28cb1']
+            ]
+          },
+          'circle-radius': {
+            property: 'point_count',
+            type: 'interval',
+            stops: [
+                [0, 20],
+                [100, 30],
+                [750, 40]
+            ]
+          }
+        }
+      })
+
+      this.state.map.addLayer({
+        id: 'people-cluster-count',
+        type: 'symbol',
+        source: 'people',
+        filter: ['has', 'point_count'],
+        layout: {
+          'text-field': '{point_count_abbreviated}',
+          'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+          'text-size': 12
+        }
+      })
+
+      this.state.map.addLayer({
+        id: 'people-unclustered-point',
+        type: 'circle',
+        source: 'people',
+        filter: ['!has', 'point_count'],
+        paint: {
+          'circle-color': 'red',
+          'circle-radius': 4,
+          'circle-stroke-width': 1,
+          'circle-stroke-color': '#fff'
+        }
+      })
+    })
+
+    // console.log(people.features)
   }
   render () {
     return (
