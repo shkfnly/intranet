@@ -1,11 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import { push } from 'react-router-redux'
 import mapboxgl from 'mapbox-gl'
 import Header from '../components/shared/Header'
 import { fetchProfiles } from '../actions/profileActions'
-// import * as _ from 'lodash'
-// selectProfile
 import MapboxClient from 'mapbox/lib/services/geocoding'
 const client = new MapboxClient('pk.eyJ1IjoiY29uc2Vuc3lzIiwiYSI6ImNqOHBmY2w0NjBmcmYyd3F1NHNmOXJwMWgifQ.8-GlTlTTUHLL8bJSnK2xIA')
 class MapView extends React.Component {
@@ -15,10 +12,6 @@ class MapView extends React.Component {
       map: null,
       offices: ['49 Bogart St, Brooklyn, NY', '1049 Market St, San Francisco, CA 94103', '250 University Avenue, Toronto, ON', '23 Featherstone Street, EC1Y 8SL London, UK', 'Dubai, UAE']
     }
-  }
-  componentWillMount (np) {
-    // throttle(this.props.fetchProfiles, 10000, {leading: true, trailing: false})
-    // this.props.fetchProfiles()
   }
   componentDidMount () {
     this.props.fetchProfiles()
@@ -32,6 +25,7 @@ class MapView extends React.Component {
     map.setZoom(1)
 
     map.addControl(new mapboxgl.NavigationControl())
+    // FOR GEOJSON OFFICE POINTS
     // let featureSet = {
     //   'type': 'FeatureCollection',
     //   'features': []
@@ -49,10 +43,19 @@ class MapView extends React.Component {
           .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
           .setHTML('<h3>Office</h3><p>' + location + '</p>'))
           .addTo(map)
+          // FOR GEOJSON OFFICE POINTS
           // featureSet.features.push(data.features[0])
           // map.getSource('offices').setData(featureSet)
         })
       })
+      map.on('mouseenter', 'people-unclustered-point', function (e) {
+        map.getCanvas().style.cursor = 'pointer'
+      })
+      map.on('mouseleave', 'people-unclustered-point', function (e) {
+        map.getCanvas().style.cursor = ''
+      })
+
+    // FOR GEOJSON OFFICE POINTS
       // map.addLayer({
       //   id: 'clusters',
       //   type: 'circle',
@@ -116,38 +119,63 @@ class MapView extends React.Component {
       'type': 'FeatureCollection',
       'features': []
     }
-    const features = this.props.profiles.map((v, i) => {
+    this.props.profiles.map((v, i) => {
       if (v.location) {
         client.geocodeForward(v.location, (err, data, res) => {
           if (err) {
             console.error(err)
           }
           // console.log(data.features[0].geometry.coordinates)
-          people.features.push(data.features[0])
-          // new mapboxgl.Marker()
-          // .setLngLat(data.features[0].geometry.coordinates)
-          // .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
-          // .setHTML(`
-          //   <div style='width: 168px; height: 168px; overflow: hidden; textAlign: 'center';'>
-          //     <img style='width: 100%;'src=${
-          //       v.avatar
-          //       ? v.avatar.uri
-          //       : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'}
-          //     />
-          //   </div>
-          //   <h3>
-          //     ${v.name}
-          //   </h3>
-          //   <p>
-          //     ${typeof v.roles !== 'undefined' ? v.roles[0] : null}
-          //   </p>`))
-          // .addTo(this.state.map)
-          // typeof this.state.map.getSource('people') !== 'undefined' ? this.state.map.getSource('people').setData(people) : null
+          let feature = {}
+          feature = data.features[0]
+          feature.properties = Object.assign({}, feature.properties, {...v})
+          people.features.push(feature)
         })
       }
     })
+    const map = this.state.map
     this.state.map.on('load', () => {
       typeof this.state.map.getSource('people') !== 'undefined' ? this.state.map.getSource('people').setData(people) : null
+      // people.features.forEach(function (marker) {
+      //   new mapboxgl.Marker()
+      //     .setLngLat(marker.geometry.coordinates)
+      //     .setPopup(new mapboxgl.Popup({ offset: 10 }) // add popups
+          // .setHTML(`
+          //   <div style='width: 168px; height: 168px; overflow: hidden; textAlign: 'center';'>
+              // <img style='width: 100%;'src=${
+              //   marker.properties.avatar
+              //   ? marker.properties.avatar.uri
+              //   : 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'}
+              // />
+          //   </div>
+          //   <h3>
+          //     ${marker.properties.name}
+          //   </h3>
+          //   <p>
+          //     ${typeof marker.properties.roles !== 'undefined' ? marker.properties.roles[0] : null}
+          //   </p>`))
+      //     .addTo(map)
+      // })
+      map.on('click', 'people-unclustered-point', function (e) {
+        map.flyTo({center: e.features[0].geometry.coordinates})
+        var feature = e.features[0].properties
+        var avatar = feature.avatar ? JSON.parse(feature.avatar).uri : false
+        new mapboxgl.Popup()
+          .setLngLat(e.features[0].geometry.coordinates)
+          .setHTML(`
+            <div style='width: 168px; height: 168px; overflow: hidden; textAlign: 'center';'>
+              <img style='width: 100%;'src=${
+                avatar || 'https://images-na.ssl-images-amazon.com/images/I/61EtpWuRHiL._AC_UL200_SR160,200_.jpg'}
+              />
+            </div>
+            <h3>
+              ${feature.name}
+            </h3>
+            <p>
+              ${typeof feature.roles !== 'undefined' ? JSON.parse(feature.roles)[0] : ''}
+            </p>`)
+          .addTo(map)
+      })
       this.state.map.addLayer({
         id: 'people-clusters',
         type: 'circle',
@@ -222,8 +250,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProfiles: () => dispatch(fetchProfiles())
-    // selectProfile: (profile) => dispatch(selectProfile(profile)),
-    // navigateToProfile: (address) => dispatch(push(`/profiles/${address}`))
   }
 }
 
