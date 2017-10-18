@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap'
+import { Collapse, Row, Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarToggler } from 'reactstrap'
 import { loginUser, logoutUser } from '../../actions/userActions'
 import { push } from 'react-router-redux'
 import uport from '../../utilities/uport'
@@ -32,49 +32,51 @@ class Header extends React.Component {
     })
   }
   handleLogout () {
-    this.props.logoutUser()
     this.props.goHome()
+    this.props.logoutUser()
   }
   render () {
     const nav = isEmpty(this.props.user)
-      ? (<Nav className='ml-auto' navbar style={{flexDirection: 'row'}}>
-        <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-          <NavLink onClick={this.getUport}>Login</NavLink>
-        </NavItem>
-      </Nav>)
-      : (<Nav className='ml-auto' navbar style={{flexDirection: 'row'}}>
-        <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-          <NavLink href='/mpi'>MPI</NavLink>
-        </NavItem>
-        <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-          <NavLink href='https://polar-forest-13728.herokuapp.com/'>Spokes</NavLink>
-        </NavItem>
-        <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-          <NavLink href='/circles'>Circles</NavLink>
-        </NavItem>
-        <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-          <NavLink href='/map'>Map</NavLink>
-        </NavItem>
-        <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-          <NavLink href='/profiles'>Members</NavLink>
-        </NavItem>
-        <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-          <NavLink href={`/profiles/${this.props.user.address}`}>Profile</NavLink>
-        </NavItem>
-        <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
-          <NavLink onClick={this.props.logoutUser}>Logout</NavLink>
-        </NavItem>
-
-      </Nav>)
+      ? (<Navbar color='faded' light toggleable>
+        <NavbarBrand href={'/'} className='mr-auto'>NEMO</NavbarBrand>
+        <Nav className='ml-auto' navbar style={{flexDirection: 'row'}}>
+          <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+            <NavLink onClick={this.getUport}>Login</NavLink>
+          </NavItem>
+        </Nav>
+      </Navbar>)
+      : (<Navbar color='faded' light toggleable>
+        <NavbarBrand href={'/home'}>NEMO</NavbarBrand>
+        <NavbarToggler onClick={this.toggle} />
+        <Collapse isOpen={this.state.isOpen} navbar>
+          <Nav className='ml-auto' navbar>
+            <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+              <NavLink href='/mpi'>MPI</NavLink>
+            </NavItem>
+            <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+              <NavLink href='https://polar-forest-13728.herokuapp.com/'>Spokes</NavLink>
+            </NavItem>
+            <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+              <NavLink href='/circles'>Circles</NavLink>
+            </NavItem>
+            <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+              <NavLink href='/map'>Map</NavLink>
+            </NavItem>
+            <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+              <NavLink href='/profiles'>Members</NavLink>
+            </NavItem>
+            <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+              <NavLink href={`/profiles/${this.props.user.address}`}>Profile</NavLink>
+            </NavItem>
+            <NavItem style={{paddingTop: 6, paddingBottom: 6, paddingLeft: 12, paddingRight: 12}}>
+              <NavLink onClick={this.props.logoutUser}>Logout</NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>)
     return (
       <div>
-        <Navbar color='faded' light toggleable>
-          <NavbarBrand href={isEmpty(this.props.user) ? '/' : '/home'}>NEMO</NavbarBrand>
-          {/* <NavbarToggler onClick={this.toggle} /> */}
-          {/* <Collapse isOpen={this.state.isOpen} navbar> */}
-          {nav}
-          {/* </Collapse> */}
-        </Navbar>
+        {nav}
       </div>
     )
   }

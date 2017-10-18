@@ -37,7 +37,7 @@ class AllServices extends React.Component {
       <div>
         <Header />
         <h3 style={{marginTop: 30, paddingLeft: 40}}>Mesh Programming Interface</h3>
-        <div style={{display: 'flex', justifyContent: 'space-around', marginTop: 30}}>
+        <div style={{display: 'flex', justifyContent: 'space-around', marginTop: 30, flexWrap: 'wrap'}}>
           <div style={Object.assign({}, styles.circle, {backgroundColor: '#3e739e'})} onClick={() => this.props.push('/mpi/orgdev')}>
             <p style={styles.circleText}>Org Dev</p>
           </div>

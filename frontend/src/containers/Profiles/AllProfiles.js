@@ -39,7 +39,7 @@ class AllProfiles extends React.Component {
     return (
       <div>
         <Header />
-        <div style={{marginTop: 20, marginLeft: 20, marginRight: 20, display: 'flex'}}>
+        <div style={{marginTop: 20, marginLeft: 20, marginRight: 20, display: 'flex', flexWrap: 'wrap'}}>
           {profiles}
         </div>
       </div>
