@@ -10,7 +10,8 @@ const styles = {
     height: 60,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    textAlign: 'center'
 
   },
   serviceHeadingText: {
@@ -78,7 +79,7 @@ class Service extends React.Component {
       const backgroundColor = {backgroundColor: routeObj.background}
       return (
         <Card style={{marginBottom: 30, width: 300}} key={i} onClick={() => this.handleClick(i)}>
-          <CardHeader tag='h4' style={{...styles.serviceHeading, ...backgroundColor}}>
+          <CardHeader tag='h5' style={{...styles.serviceHeading, ...backgroundColor}}>
             {v.name}
           </CardHeader>
           <Collapse isOpen={this.state[i.toString()]} style={{paddingBottom: 15}}>
