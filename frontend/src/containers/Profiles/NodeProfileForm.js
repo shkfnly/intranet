@@ -35,6 +35,7 @@ class NodeProfileForm extends Component {
   //   this.setState({user: {}})
   // }
   componentWillReceiveProps (props) {
+    console.log(props.profile)
     this.setState({
       user: {
         avatar: props.profile.avatar,
