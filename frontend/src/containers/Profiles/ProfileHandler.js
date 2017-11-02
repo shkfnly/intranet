@@ -28,8 +28,8 @@ class ProfileHandler extends React.Component {
 
   render () {
     const profile = this.state.editing
-              ? <NodeProfileForm profile={this.props.profile} editHandler={this.editHandler} />
-              : <NodeProfile profile={this.props.profile} user={this.props.user} editHandler={this.editHandler} profileID={this.props.match.params.profileID} />
+      ? <NodeProfileForm profile={this.props.profile} editHandler={this.editHandler} />
+      : <NodeProfile profile={this.props.profile} user={this.props.user} editHandler={this.editHandler} profileID={this.props.match.params.profileID} />
     return (
       <div>
         <Header />

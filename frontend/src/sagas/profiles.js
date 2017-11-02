@@ -17,6 +17,7 @@ function* fetchProfiles () {
     .then((profilesArr) => {
       // console.log(profileArr)
       profiles = profilesArr
+      console.log(profiles)
     })
   yield put(storeProfiles(profiles))
 }
@@ -33,6 +34,7 @@ function* fetchProfile (action) {
     .then((response) => response.json())
     .then((profileResponse) => {
       profile = profileResponse
+      console.log(profile)
     })
   yield put(selectProfile(profile))
 }
